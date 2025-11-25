@@ -1,0 +1,73 @@
+<form id="bundler-form">
+  <div>
+    <label for="group-1">Group 1</label>
+    <select id="group-1">
+      {% for product in collections.all.products %}
+        {% if product.tags contains "Group 1" %}
+          {% assign variant = product.selected_or_first_available_variant %}
+          <option value="{{ variant.id }}">{{ product.title }} - {{ variant.price | money }}</option>
+        {% endif %}
+      {% endfor %}
+    </select>
+  </div>
+    <div>
+    <label for="group-2">Group 2</label>
+    <select id="group-2">
+      {% for product in collections.all.products %}
+        {% if product.tags contains "Group 2" %}
+          {% assign variant = product.selected_or_first_available_variant %}
+          <option value="{{ variant.id }}">{{ product.title }} - {{ variant.price | money }}</option>
+        {% endif %}
+      {% endfor %}
+    </select>
+  </div>
+
+  <button type="submit">Create Bundle</button>
+</form>
+
+<script>
+  const form = document.getElementById('bundler-form');
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const group1 = document.getElementById("group-1").value;
+    const group2 = document.getElementById("group-2").value;
+    const bundleId = new Date().getTime();
+
+    await fetch("/cart/add.js", {
+      method:"Post",
+      headers:{
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        items:[
+          {
+            id: group1,
+            quantity: 1,
+            properties:{
+              _bundle_id: bundleId
+            }
+          },
+          {
+            id: group2,
+            quantity: 1,
+            properties:{
+              _bundle_id: bundleId
+            }
+          }
+        ]
+      })
+    })
+    window.location.reload();
+  })
+</script>
+
+{% schema %}
+  {
+    "name": "bundle builder",
+    "settings": [],
+    "presets": [{
+      "name": "Bundle Builder"
+    }]
+  }
+{% endschema %}

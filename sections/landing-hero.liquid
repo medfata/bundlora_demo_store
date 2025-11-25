@@ -1,0 +1,115 @@
+{% comment %}
+  Hero section for Bundlora landing page
+  Focus on clear value proposition and primary CTA
+{% endcomment %}
+
+<section class="landing-hero">
+  <div class="landing-container">
+    <div class="landing-hero__content">
+      <h1 class="landing-hero__headline">
+        {{ section.settings.headline | default: 'See bundle builders in action' }}
+      </h1>
+
+      <p class="landing-hero__subline">
+        {{ section.settings.subline | default: 'Try our 3 bundle types and see which fits your store best.' }}
+      </p>
+
+      <div class="landing-hero__carousel-container">
+        <div class="landing-hero__carousel" data-carousel>
+          <div class="landing-hero__carousel-track">
+            <!-- Quick Bundles -->
+            <div class="landing-hero__carousel-card">
+              <div class="landing-hero__card-image">
+                <div class="landing-hero__image-placeholder">
+                  <span>Quick Bundle Desktop Screenshot</span>
+                </div>
+                <div class="landing-hero__card-overlay">
+                  <div class="landing-hero__card-content">
+                    <h3>Quick Bundles</h3>
+                    <p>Let customers create their own bundles in seconds</p>
+                    <a href="/pages/quick-bundles" class="landing-btn landing-btn--primary">View Demo</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Volume Discounts -->
+            <div class="landing-hero__carousel-card">
+              <div class="landing-hero__card-image">
+                <div class="landing-hero__image-placeholder">
+                  <span>Volume Bundle Desktop Screenshot</span>
+                </div>
+                <div class="landing-hero__card-overlay">
+                  <div class="landing-hero__card-content">
+                    <h3>Volume Discounts</h3>
+                    <p>Buy more, save more pricing that sells itself</p>
+                    <a href="/pages/volume-bundles" class="landing-btn landing-btn--primary">View Demo</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Guided Shopping -->
+            <div class="landing-hero__carousel-card">
+              <div class="landing-hero__card-image">
+                <div class="landing-hero__image-placeholder">
+                  <span>Guided Bundle Desktop Screenshot</span>
+                </div>
+                <div class="landing-hero__card-overlay">
+                  <div class="landing-hero__card-content">
+                    <h3>Guided Shopping</h3>
+                    <p>Suggest perfect product combinations to customers</p>
+                    <a href="/pages/guided-bundles" class="landing-btn landing-btn--primary">View Demo</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Arrows -->
+          <button class="landing-hero__carousel-nav landing-hero__carousel-nav--prev" data-carousel-prev>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="landing-hero__carousel-nav landing-hero__carousel-nav--next" data-carousel-next>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+              <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Landing Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "See bundle builders in action"
+    },
+    {
+      "type": "textarea",
+      "id": "subline",
+      "label": "Subline",
+      "default": "Try our 3 bundle types and see which fits your store best."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image (Optional)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Landing Hero"
+    }
+  ]
+}
+{% endschema %}

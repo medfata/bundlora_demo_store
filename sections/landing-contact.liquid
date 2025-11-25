@@ -1,0 +1,94 @@
+{% comment %}
+  Simple contact form for demo store - email and message only
+{% endcomment %}
+
+<section class="landing-contact">
+  <div class="landing-container">
+    <div class="landing-contact__content">
+      <h2 class="landing-section-title">
+        {{ section.settings.title | default: 'Questions about bundles?' }}
+      </h2>
+      <p class="landing-section-subtitle">
+        {{ section.settings.subtitle | default: 'Ask us anything. We respond within 2 hours.' }}
+      </p>
+
+      <form class="landing-contact__form" action="/contact#contact_form" method="post" accept-charset="UTF-8">
+        <input type="hidden" name="form_type" value="contact">
+        <input type="hidden" name="utf8" value="✓">
+
+        <div class="landing-contact__fields">
+          <div class="landing-contact__field">
+            <label for="contact_email" class="landing-contact__label">Your Email</label>
+            <input
+              type="email"
+              id="contact_email"
+              name="contact[email]"
+              placeholder="merchant@store.com"
+              required
+              class="landing-contact__input"
+            >
+          </div>
+
+          <div class="landing-contact__field">
+            <label for="contact_message" class="landing-contact__label">Your Question</label>
+            <textarea
+              id="contact_message"
+              name="contact[body]"
+              placeholder="Which bundle type works best for my products?"
+              required
+              rows="5"
+              class="landing-contact__textarea"
+            ></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="landing-btn landing-btn--primary landing-contact__submit">
+          {{ section.settings.submit_text | default: 'Send question' }}
+        </button>
+
+        {% if form.errors %}
+          <div class="landing-contact__errors">
+            {{ form.errors | default_errors }}
+          </div>
+        {% endif %}
+
+        {% if form.posted_successfully? %}
+          <div class="landing-contact__success">
+            Thanks! We'll respond within 2 hours.
+          </div>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact Form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Questions about bundles?"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "Ask us anything. We respond within 2 hours."
+    },
+    {
+      "type": "text",
+      "id": "submit_text",
+      "label": "Submit Button Text",
+      "default": "Send question"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Form"
+    }
+  ]
+}
+{% endschema %}
