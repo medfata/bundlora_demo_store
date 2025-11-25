@@ -1,0 +1,442 @@
+{
+    "metafield_definitions": {
+        "product": [
+            {
+                "namespace": "bundlora",
+                "key": "bundle_eligible",
+                "name": "Bundle eligible",
+                "description": "Whether this product can be included in bundles",
+                "type": "boolean",
+                "validations": []
+            },
+            {
+                "namespace": "bundlora",
+                "key": "bundle_category",
+                "name": "Bundle category",
+                "description": "Category for bundle grouping (e.g., base, accessory, upgrade)",
+                "type": "single_line_text_field",
+                "validations": [
+                    {
+                        "name": "choices",
+                        "value": [
+                            "base",
+                            "accessory",
+                            "upgrade",
+                            "add-on"
+                        ]
+                    }
+                ]
+            },
+            {
+                "namespace": "bundlora",
+                "key": "max_bundle_quantity",
+                "name": "Maximum bundle quantity",
+                "description": "Maximum quantity allowed in a single bundle",
+                "type": "number_integer",
+                "validations": [
+                    {
+                        "name": "min",
+                        "value": 1
+                    },
+                    {
+                        "name": "max",
+                        "value": 100
+                    }
+                ]
+            },
+            {
+                "namespace": "specs",
+                "key": "materials",
+                "name": "Materials",
+                "description": "Product materials and composition",
+                "type": "single_line_text_field",
+                "validations": []
+            },
+            {
+                "namespace": "specs",
+                "key": "dimensions",
+                "name": "Dimensions",
+                "description": "Product dimensions (L x W x H)",
+                "type": "single_line_text_field",
+                "validations": []
+            },
+            {
+                "namespace": "specs",
+                "key": "weight",
+                "name": "Weight",
+                "description": "Product weight",
+                "type": "weight",
+                "validations": []
+            },
+            {
+                "namespace": "specs",
+                "key": "warranty",
+                "name": "Warranty",
+                "description": "Warranty information",
+                "type": "single_line_text_field",
+                "validations": []
+            },
+            {
+                "namespace": "specs",
+                "key": "features",
+                "name": "Key features",
+                "description": "List of key product features",
+                "type": "list.single_line_text_field",
+                "validations": []
+            },
+            {
+                "namespace": "custom",
+                "key": "short_description",
+                "name": "Short description",
+                "description": "Brief product description for cards and previews",
+                "type": "multi_line_text_field",
+                "validations": [
+                    {
+                        "name": "max",
+                        "value": 200
+                    }
+                ]
+            },
+            {
+                "namespace": "custom",
+                "key": "usp_highlights",
+                "name": "USP highlights",
+                "description": "Unique selling points displayed on product page",
+                "type": "list.single_line_text_field",
+                "validations": []
+            }
+        ],
+        "variant": [
+            {
+                "namespace": "bundlora",
+                "key": "bundle_price_override",
+                "name": "Bundle price override",
+                "description": "Special price when included in a bundle",
+                "type": "money",
+                "validations": []
+            },
+            {
+                "namespace": "specs",
+                "key": "color_hex",
+                "name": "Color hex code",
+                "description": "Hex color code for swatch display",
+                "type": "single_line_text_field",
+                "validations": [
+                    {
+                        "name": "regex",
+                        "value": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+                    }
+                ]
+            }
+        ],
+        "collection": [
+            {
+                "namespace": "bundlora",
+                "key": "bundle_collection",
+                "name": "Bundle collection",
+                "description": "Whether this collection is used for bundle products",
+                "type": "boolean",
+                "validations": []
+            },
+            {
+                "namespace": "bundlora",
+                "key": "bundle_builder_id",
+                "name": "Bundle builder ID",
+                "description": "Associated Bundlora bundle builder ID",
+                "type": "single_line_text_field",
+                "validations": []
+            }
+        ]
+    },
+    "metaobject_definitions": [
+        {
+            "type": "buying_guide",
+            "name": "Buying guide",
+            "description": "Detailed buying guides to help customers make informed decisions",
+            "field_definitions": [
+                {
+                    "key": "title",
+                    "name": "Title",
+                    "type": "single_line_text_field",
+                    "required": true
+                },
+                {
+                    "key": "introduction",
+                    "name": "Introduction",
+                    "type": "multi_line_text_field",
+                    "required": true
+                },
+                {
+                    "key": "sections",
+                    "name": "Guide sections",
+                    "type": "list.mixed_reference",
+                    "required": false
+                },
+                {
+                    "key": "featured_products",
+                    "name": "Featured products",
+                    "type": "list.product_reference",
+                    "required": false
+                },
+                {
+                    "key": "related_collections",
+                    "name": "Related collections",
+                    "type": "list.collection_reference",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "type": "comparison_chart",
+            "name": "Comparison chart",
+            "description": "Product comparison charts for decision support",
+            "field_definitions": [
+                {
+                    "key": "title",
+                    "name": "Chart title",
+                    "type": "single_line_text_field",
+                    "required": true
+                },
+                {
+                    "key": "description",
+                    "name": "Description",
+                    "type": "multi_line_text_field",
+                    "required": false
+                },
+                {
+                    "key": "products",
+                    "name": "Products to compare",
+                    "type": "list.product_reference",
+                    "required": true,
+                    "validations": [
+                        {
+                            "name": "min",
+                            "value": 2
+                        },
+                        {
+                            "name": "max",
+                            "value": 5
+                        }
+                    ]
+                },
+                {
+                    "key": "comparison_attributes",
+                    "name": "Attributes to compare",
+                    "type": "list.single_line_text_field",
+                    "required": true
+                },
+                {
+                    "key": "highlight_winner",
+                    "name": "Highlight recommended",
+                    "type": "boolean",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "type": "faq_section",
+            "name": "FAQ section",
+            "description": "Frequently asked questions for products or collections",
+            "field_definitions": [
+                {
+                    "key": "title",
+                    "name": "Section title",
+                    "type": "single_line_text_field",
+                    "required": true
+                },
+                {
+                    "key": "questions",
+                    "name": "Questions",
+                    "type": "list.mixed_reference",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "type": "faq_item",
+            "name": "FAQ item",
+            "description": "Individual FAQ question and answer",
+            "field_definitions": [
+                {
+                    "key": "question",
+                    "name": "Question",
+                    "type": "single_line_text_field",
+                    "required": true
+                },
+                {
+                    "key": "answer",
+                    "name": "Answer",
+                    "type": "rich_text_field",
+                    "required": true
+                },
+                {
+                    "key": "category",
+                    "name": "Category",
+                    "type": "single_line_text_field",
+                    "required": false
+                }
+            ]
+        },
+        {
+            "type": "bundle_config",
+            "name": "Bundle configuration",
+            "description": "Configuration for Bundlora bundle builders",
+            "field_definitions": [
+                {
+                    "key": "name",
+                    "name": "Bundle name",
+                    "type": "single_line_text_field",
+                    "required": true
+                },
+                {
+                    "key": "description",
+                    "name": "Bundle description",
+                    "type": "multi_line_text_field",
+                    "required": false
+                },
+                {
+                    "key": "bundle_type",
+                    "name": "Bundle type",
+                    "type": "single_line_text_field",
+                    "required": true,
+                    "validations": [
+                        {
+                            "name": "choices",
+                            "value": [
+                                "quick",
+                                "volume",
+                                "guided"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "key": "discount_type",
+                    "name": "Discount type",
+                    "type": "single_line_text_field",
+                    "required": true,
+                    "validations": [
+                        {
+                            "name": "choices",
+                            "value": [
+                                "percentage",
+                                "fixed",
+                                "tiered_quantity",
+                                "tiered_amount"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "key": "discount_value",
+                    "name": "Discount value",
+                    "type": "number_decimal",
+                    "required": false
+                },
+                {
+                    "key": "min_items",
+                    "name": "Minimum items",
+                    "type": "number_integer",
+                    "required": false
+                },
+                {
+                    "key": "max_items",
+                    "name": "Maximum items",
+                    "type": "number_integer",
+                    "required": false
+                },
+                {
+                    "key": "eligible_products",
+                    "name": "Eligible products",
+                    "type": "list.product_reference",
+                    "required": false
+                },
+                {
+                    "key": "eligible_collections",
+                    "name": "Eligible collections",
+                    "type": "list.collection_reference",
+                    "required": false
+                },
+                {
+                    "key": "hero_image",
+                    "name": "Hero image",
+                    "type": "file_reference",
+                    "required": false
+                },
+                {
+                    "key": "active",
+                    "name": "Active",
+                    "type": "boolean",
+                    "required": true
+                }
+            ]
+        },
+        {
+            "type": "tiered_discount",
+            "name": "Tiered discount",
+            "description": "Tiered discount configuration for bundles",
+            "field_definitions": [
+                {
+                    "key": "tier_name",
+                    "name": "Tier name",
+                    "type": "single_line_text_field",
+                    "required": true
+                },
+                {
+                    "key": "threshold_type",
+                    "name": "Threshold type",
+                    "type": "single_line_text_field",
+                    "required": true,
+                    "validations": [
+                        {
+                            "name": "choices",
+                            "value": [
+                                "quantity",
+                                "amount"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "key": "min_threshold",
+                    "name": "Minimum threshold",
+                    "type": "number_decimal",
+                    "required": true
+                },
+                {
+                    "key": "max_threshold",
+                    "name": "Maximum threshold",
+                    "type": "number_decimal",
+                    "required": false
+                },
+                {
+                    "key": "discount_type",
+                    "name": "Discount type",
+                    "type": "single_line_text_field",
+                    "required": true,
+                    "validations": [
+                        {
+                            "name": "choices",
+                            "value": [
+                                "percentage",
+                                "fixed"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "key": "discount_value",
+                    "name": "Discount value",
+                    "type": "number_decimal",
+                    "required": true
+                },
+                {
+                    "key": "badge_text",
+                    "name": "Badge text",
+                    "type": "single_line_text_field",
+                    "required": false
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,166 @@
+{%- comment -%}
+  Product Specifications Snippet
+  Displays product metafield specifications in a structured format
+  
+  Usage:
+  {% render 'product-specs', product: product %}
+  
+  Required Metafields (namespace: specs):
+  - materials: Product materials
+  - dimensions: Product dimensions
+  - weight: Product weight
+  - warranty: Warranty information
+  - features: List of key features
+{%- endcomment -%}
+
+{%- liquid
+  assign has_specs = false
+  if product.metafields.specs.materials != blank
+    assign has_specs = true
+  endif
+  if product.metafields.specs.dimensions != blank
+    assign has_specs = true
+  endif
+  if product.metafields.specs.weight != blank
+    assign has_specs = true
+  endif
+  if product.metafields.specs.warranty != blank
+    assign has_specs = true
+  endif
+  if product.metafields.specs.features != blank
+    assign has_specs = true
+  endif
+-%}
+
+{%- if has_specs -%}
+  <div class="product-specs" aria-label="{{ 'products.product.specifications' | t | default: 'Specifications' }}">
+    <h3 class="product-specs__title h4">
+      {{ 'products.product.specifications' | t | default: 'Specifications' }}
+    </h3>
+    
+    <dl class="product-specs__list">
+      {%- if product.metafields.specs.materials != blank -%}
+        <div class="product-specs__item">
+          <dt class="product-specs__label">Materials</dt>
+          <dd class="product-specs__value">{{ product.metafields.specs.materials }}</dd>
+        </div>
+      {%- endif -%}
+      
+      {%- if product.metafields.specs.dimensions != blank -%}
+        <div class="product-specs__item">
+          <dt class="product-specs__label">Dimensions</dt>
+          <dd class="product-specs__value">{{ product.metafields.specs.dimensions }}</dd>
+        </div>
+      {%- endif -%}
+      
+      {%- if product.metafields.specs.weight != blank -%}
+        <div class="product-specs__item">
+          <dt class="product-specs__label">Weight</dt>
+          <dd class="product-specs__value">{{ product.metafields.specs.weight.value }} {{ product.metafields.specs.weight.unit }}</dd>
+        </div>
+      {%- endif -%}
+      
+      {%- if product.metafields.specs.warranty != blank -%}
+        <div class="product-specs__item">
+          <dt class="product-specs__label">Warranty</dt>
+          <dd class="product-specs__value">{{ product.metafields.specs.warranty }}</dd>
+        </div>
+      {%- endif -%}
+    </dl>
+    
+    {%- if product.metafields.specs.features != blank -%}
+      <div class="product-specs__features">
+        <h4 class="product-specs__features-title">Key Features</h4>
+        <ul class="product-specs__features-list">
+          {%- for feature in product.metafields.specs.features.value -%}
+            <li class="product-specs__feature">
+              <span class="product-specs__feature-icon" aria-hidden="true">
+                {%- render 'icon-checkmark' -%}
+              </span>
+              {{ feature }}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+<style>
+  .product-specs {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: rgba(var(--color-foreground), 0.02);
+    border-radius: var(--text-boxes-radius);
+  }
+  
+  .product-specs__title {
+    margin: 0 0 1.5rem;
+    font-size: 1.6rem;
+  }
+  
+  .product-specs__list {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+  }
+  
+  .product-specs__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+  }
+  
+  .product-specs__item:last-child {
+    border-bottom: none;
+  }
+  
+  .product-specs__label {
+    font-weight: 500;
+    color: rgba(var(--color-foreground), 0.7);
+  }
+  
+  .product-specs__value {
+    text-align: right;
+    margin: 0;
+  }
+  
+  .product-specs__features {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(var(--color-foreground), 0.1);
+  }
+  
+  .product-specs__features-title {
+    font-size: 1.4rem;
+    margin: 0 0 1rem;
+  }
+  
+  .product-specs__features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+  
+  .product-specs__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 1.4rem;
+  }
+  
+  .product-specs__feature-icon {
+    flex-shrink: 0;
+    width: 1.6rem;
+    height: 1.6rem;
+    color: rgb(var(--color-button));
+  }
+  
+  .product-specs__feature-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+</style>

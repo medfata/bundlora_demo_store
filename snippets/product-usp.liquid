@@ -1,0 +1,60 @@
+{%- comment -%}
+  Product USP Highlights Snippet
+  Displays unique selling points from metafields
+  
+  Usage:
+  {% render 'product-usp', product: product %}
+  
+  Required Metafields (namespace: custom):
+  - usp_highlights: List of unique selling points
+{%- endcomment -%}
+
+{%- if product.metafields.custom.usp_highlights != blank -%}
+  <div class="product-usp" role="list" aria-label="{{ 'products.product.highlights' | t | default: 'Product highlights' }}">
+    {%- for usp in product.metafields.custom.usp_highlights.value -%}
+      <div class="product-usp__item" role="listitem">
+        <span class="product-usp__icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 0L10.2 5.8L16 6.2L11.6 10.2L13 16L8 12.8L3 16L4.4 10.2L0 6.2L5.8 5.8L8 0Z" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="product-usp__text">{{ usp }}</span>
+      </div>
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+<style>
+  .product-usp {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1rem 0;
+  }
+  
+  .product-usp__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(var(--color-button), 0.08);
+    border-radius: 100px;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  
+  .product-usp__icon {
+    color: rgb(var(--color-button));
+    display: flex;
+    align-items: center;
+  }
+  
+  .product-usp__icon svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+  
+  .product-usp__text {
+    color: rgba(var(--color-foreground), 0.9);
+  }
+</style>

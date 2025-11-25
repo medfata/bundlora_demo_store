@@ -1,0 +1,258 @@
+/* ==========================================================================
+   Bundlora Demo Store Enhancements
+   Accessibility & Performance Optimizations
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Accessibility Enhancements (WCAG 2.1 AA Compliance)
+   -------------------------------------------------------------------------- */
+
+/* Ensure minimum contrast ratio of 4.5:1 for body text */
+body {
+  color: rgba(var(--color-foreground), 0.87);
+}
+
+/* Enhanced focus states for keyboard navigation */
+:focus-visible {
+  outline: 2px solid rgb(var(--color-button));
+  outline-offset: 2px;
+}
+
+/* Skip link improvements */
+.skip-to-content-link:focus {
+  clip: auto;
+  width: auto;
+  height: auto;
+  padding: 1rem 2rem;
+  background-color: rgb(var(--color-button));
+  color: rgb(var(--color-button-text));
+  z-index: 10001;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Improved link contrast */
+a:not(.button) {
+  color: rgb(var(--color-link));
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:not(.button):hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Form input accessibility */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid rgb(var(--color-button));
+  outline-offset: 1px;
+}
+
+/* Error state styling */
+.field--error input,
+.field--error select,
+.field--error textarea {
+  border-color: #dc2626;
+  outline-color: #dc2626;
+}
+
+.form__message--error {
+  color: #dc2626;
+}
+
+/* Success state styling */
+.form__message--success {
+  color: #059669;
+}
+
+/* --------------------------------------------------------------------------
+   Performance Optimizations
+   -------------------------------------------------------------------------- */
+
+/* Lazy loading placeholder */
+.lazy-image {
+  background-color: rgba(var(--color-foreground), 0.05);
+  transition: opacity 0.3s ease;
+}
+
+.lazy-image[data-loaded="true"] {
+  background-color: transparent;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .scroll-trigger.animate--slide-in,
+  .scroll-trigger.animate--fade-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Content visibility for off-screen content */
+.section-below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Image Optimizations
+   -------------------------------------------------------------------------- */
+
+/* Ensure images are responsive by default */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Aspect ratio containers for CLS prevention */
+.aspect-ratio-container {
+  position: relative;
+  width: 100%;
+}
+
+.aspect-ratio-container::before {
+  content: "";
+  display: block;
+  padding-top: var(--aspect-ratio, 100%);
+}
+
+.aspect-ratio-container > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --------------------------------------------------------------------------
+   Bundle-Specific Enhancements
+   -------------------------------------------------------------------------- */
+
+/* Tiered discount highlight */
+.price--on-sale .price-item--sale {
+  color: rgb(var(--color-button));
+  font-weight: 600;
+}
+
+/* Bundle savings callout */
+.bundle-savings-callout {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, rgba(var(--color-button), 0.1), rgba(var(--color-button), 0.05));
+  border-radius: var(--buttons-radius);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: rgb(var(--color-button));
+}
+
+.bundle-savings-callout__icon {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+/* Quantity discount indicator */
+.quantity-discount-indicator {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: rgba(var(--color-button), 0.05);
+  border-left: 3px solid rgb(var(--color-button));
+  border-radius: 0 var(--inputs-radius) var(--inputs-radius) 0;
+  font-size: 1.2rem;
+}
+
+/* --------------------------------------------------------------------------
+   Cart Enhancements for Bundlora
+   -------------------------------------------------------------------------- */
+
+/* Cart item discount display */
+.cart-item__discount-applied {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  background-color: rgba(var(--color-button), 0.08);
+  border-radius: var(--inputs-radius);
+  font-size: 1.1rem;
+  color: rgb(var(--color-button));
+}
+
+.cart-item__discount-applied svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  flex-shrink: 0;
+}
+
+/* Cart totals discount row */
+.totals__discount-row {
+  color: rgb(var(--color-button));
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Optimizations
+   -------------------------------------------------------------------------- */
+
+@media screen and (max-width: 749px) {
+  /* Larger touch targets */
+  .button,
+  button,
+  [type="button"],
+  [type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improved mobile spacing */
+  .page-width {
+    padding: 0 1rem;
+  }
+  
+  /* Mobile-friendly form inputs */
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Print Styles
+   -------------------------------------------------------------------------- */
+
+@media print {
+  .header-wrapper,
+  .footer,
+  .cart-notification,
+  .cart-drawer,
+  .skip-to-content-link {
+    display: none !important;
+  }
+  
+  body {
+    color: #000;
+    background: #fff;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+  
+  .price-item--sale {
+    color: #000;
+  }
+}

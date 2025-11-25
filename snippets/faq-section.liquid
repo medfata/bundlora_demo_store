@@ -1,0 +1,117 @@
+{%- comment -%}
+  FAQ Section Snippet
+  Displays FAQ items from metaobject in accordion format
+  
+  Usage:
+  {% render 'faq-section', faq: metaobject %}
+  
+  Metaobject type: faq_section
+  Fields:
+  - title: Section title
+  - questions: List of faq_item references
+{%- endcomment -%}
+
+{%- if faq != blank and faq.questions.value.size > 0 -%}
+  <div class="faq-section" aria-labelledby="faq-title-{{ faq.id }}">
+    {%- if faq.title != blank -%}
+      <h3 class="faq-section__title" id="faq-title-{{ faq.id }}">
+        {{ faq.title }}
+      </h3>
+    {%- endif -%}
+    
+    <div class="faq-section__list accordion" role="list">
+      {%- for item in faq.questions.value -%}
+        <details class="faq-section__item accordion__item" role="listitem">
+          <summary class="faq-section__question accordion__summary">
+            <span class="faq-section__question-text">{{ item.question }}</span>
+            <span class="faq-section__icon" aria-hidden="true">
+              {%- render 'icon-caret' -%}
+            </span>
+          </summary>
+          <div class="faq-section__answer accordion__content rte">
+            {{ item.answer | metafield_tag }}
+          </div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+<style>
+  .faq-section {
+    margin: 2rem 0;
+  }
+  
+  .faq-section__title {
+    margin-bottom: 1.5rem;
+  }
+  
+  .faq-section__list {
+    border: 1px solid rgba(var(--color-foreground), 0.1);
+    border-radius: var(--text-boxes-radius);
+    overflow: hidden;
+  }
+  
+  .faq-section__item {
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+  }
+  
+  .faq-section__item:last-child {
+    border-bottom: none;
+  }
+  
+  .faq-section__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+  }
+  
+  .faq-section__question::-webkit-details-marker {
+    display: none;
+  }
+  
+  .faq-section__question:hover {
+    background-color: rgba(var(--color-foreground), 0.02);
+  }
+  
+  .faq-section__question-text {
+    flex: 1;
+    padding-right: 1rem;
+  }
+  
+  .faq-section__icon {
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+  
+  .faq-section__item[open] .faq-section__icon {
+    transform: rotate(180deg);
+  }
+  
+  .faq-section__answer {
+    padding: 0 1.5rem 1.5rem;
+    color: rgba(var(--color-foreground), 0.8);
+  }
+  
+  .faq-section__answer p:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* Accessibility: Focus styles */
+  .faq-section__question:focus-visible {
+    outline: 2px solid rgb(var(--color-button));
+    outline-offset: -2px;
+  }
+  
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .faq-section__icon {
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,186 @@
+{%- comment -%}
+  Comparison Chart Snippet
+  Displays product comparison from metaobject
+  
+  Usage:
+  {% render 'comparison-chart', chart: metaobject %}
+  
+  Metaobject type: comparison_chart
+  Fields:
+  - title: Chart title
+  - description: Description
+  - products: Products to compare
+  - comparison_attributes: Attributes to compare
+  - highlight_winner: Highlight recommended
+{%- endcomment -%}
+
+{%- if chart != blank and chart.products.value.size > 0 -%}
+  <div class="comparison-chart" aria-labelledby="comparison-chart-title-{{ chart.id }}">
+    {%- if chart.title != blank -%}
+      <h3 class="comparison-chart__title" id="comparison-chart-title-{{ chart.id }}">
+        {{ chart.title }}
+      </h3>
+    {%- endif -%}
+    
+    {%- if chart.description != blank -%}
+      <p class="comparison-chart__description">{{ chart.description }}</p>
+    {%- endif -%}
+    
+    <div class="comparison-chart__wrapper">
+      <table class="comparison-chart__table" role="table">
+        <thead>
+          <tr>
+            <th scope="col" class="comparison-chart__header comparison-chart__header--attribute">
+              <span class="visually-hidden">Attribute</span>
+            </th>
+            {%- for product in chart.products.value -%}
+              <th scope="col" class="comparison-chart__header comparison-chart__header--product">
+                <div class="comparison-chart__product-header">
+                  {%- if product.featured_image != blank -%}
+                    <img 
+                      src="{{ product.featured_image | image_url: width: 100 }}"
+                      alt="{{ product.featured_image.alt | escape }}"
+                      width="50"
+                      height="50"
+                      loading="lazy"
+                      class="comparison-chart__product-image"
+                    >
+                  {%- endif -%}
+                  <span class="comparison-chart__product-title">{{ product.title }}</span>
+                  <span class="comparison-chart__product-price">{{ product.price | money }}</span>
+                </div>
+              </th>
+            {%- endfor -%}
+          </tr>
+        </thead>
+        <tbody>
+          {%- for attribute in chart.comparison_attributes.value -%}
+            <tr class="comparison-chart__row">
+              <th scope="row" class="comparison-chart__attribute">{{ attribute }}</th>
+              {%- for product in chart.products.value -%}
+                <td class="comparison-chart__value">
+                  {%- comment -%} 
+                    Look up the attribute value from product metafields
+                    This assumes attributes match metafield keys in specs namespace
+                  {%- endcomment -%}
+                  {%- assign attr_key = attribute | handleize | replace: '-', '_' -%}
+                  {%- assign attr_value = product.metafields.specs[attr_key] -%}
+                  {%- if attr_value != blank -%}
+                    {{ attr_value }}
+                  {%- else -%}
+                    <span class="comparison-chart__na">—</span>
+                  {%- endif -%}
+                </td>
+              {%- endfor -%}
+            </tr>
+          {%- endfor -%}
+        </tbody>
+        <tfoot>
+          <tr class="comparison-chart__actions-row">
+            <td></td>
+            {%- for product in chart.products.value -%}
+              <td class="comparison-chart__action">
+                <a href="{{ product.url }}" class="button button--secondary comparison-chart__button">
+                  View Details
+                </a>
+              </td>
+            {%- endfor -%}
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+{%- endif -%}
+
+<style>
+  .comparison-chart {
+    margin: 2rem 0;
+  }
+  
+  .comparison-chart__title {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .comparison-chart__description {
+    text-align: center;
+    color: rgba(var(--color-foreground), 0.7);
+    margin-bottom: 2rem;
+  }
+  
+  .comparison-chart__wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .comparison-chart__table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+  }
+  
+  .comparison-chart__header {
+    padding: 1rem;
+    text-align: center;
+    vertical-align: bottom;
+    border-bottom: 2px solid rgba(var(--color-foreground), 0.1);
+  }
+  
+  .comparison-chart__header--attribute {
+    width: 20%;
+  }
+  
+  .comparison-chart__product-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .comparison-chart__product-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: var(--media-radius);
+  }
+  
+  .comparison-chart__product-title {
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
+  
+  .comparison-chart__product-price {
+    font-size: 1.3rem;
+    color: rgba(var(--color-foreground), 0.7);
+  }
+  
+  .comparison-chart__row:nth-child(even) {
+    background-color: rgba(var(--color-foreground), 0.02);
+  }
+  
+  .comparison-chart__attribute {
+    padding: 1rem;
+    font-weight: 500;
+    text-align: left;
+    color: rgba(var(--color-foreground), 0.8);
+  }
+  
+  .comparison-chart__value {
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .comparison-chart__na {
+    color: rgba(var(--color-foreground), 0.3);
+  }
+  
+  .comparison-chart__action {
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+  
+  .comparison-chart__button {
+    width: 100%;
+    max-width: 150px;
+  }
+</style>

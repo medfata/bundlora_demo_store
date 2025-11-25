@@ -1,1 +1,37 @@
-{"sections":{"main":{"type":"main-404","disabled":true,"settings":{}},"landing_hero_rFhVTP":{"type":"landing-hero","name":"Landing Hero","settings":{"headline":"Turn Single Purchases Into Profitable Bundles","subline":"Install in 60 seconds. Start selling bundles immediately. No setup required.","cta_text":"Start Free Trial - No Credit Card","cta_url":"","trust_text":"14-day free trial • 5-minute setup • Cancel anytime"}},"landing_problem_solution_dRi48E":{"type":"landing-problem-solution","blocks":{"solution_point_kXMhYX":{"type":"solution_point","settings":{"icon":"single-item","title":"Customers buy one item when they could buy three","text":"Most customers leave with just one product, missing out on complementary items that would enhance their experience."}},"solution_point_xgNEFc":{"type":"solution_point","settings":{"icon":"bundle-builder","title":"Smart bundle builders that increase cart value automatically","text":"Our intelligent system suggests perfect product combinations and makes bundling irresistible with smart discounts."}},"solution_point_c6xGMi":{"type":"solution_point","settings":{"icon":"growth","title":"40% higher AOV with zero merchant effort","text":"Install once and watch your average order value grow. No ongoing management or optimization needed."}}},"block_order":["solution_point_kXMhYX","solution_point_xgNEFc","solution_point_c6xGMi"],"name":"Problem Solution","settings":{"title":"Stop losing money on single-item purchases"}},"landing_bundle_types_XXdDmD":{"type":"landing-bundle-types","blocks":{"bundle_type_K96JX9":{"type":"bundle_type","settings":{"bundle_type":"quick","title":"Quick Bundles","description":"Let customers create custom bundles in 30 seconds","perfect_for":"Accessories, snacks, beauty","highlight_text":"Most popular choice"}},"bundle_type_WrbML4":{"type":"bundle_type","settings":{"bundle_type":"volume","title":"Volume Discounts","description":"Bulk pricing that sells itself - 2-pack, 4-pack, 6-pack","perfect_for":"Coffee, supplements, consumables","highlight_text":""}},"bundle_type_WCrtHm":{"type":"bundle_type","settings":{"bundle_type":"guided","title":"Guided Shopping","description":"Walk customers through perfect product combinations","perfect_for":"Skincare routines, tech setups","highlight_text":""}}},"block_order":["bundle_type_K96JX9","bundle_type_WrbML4","bundle_type_WCrtHm"],"name":"Bundle Types","settings":{"title":"Three powerful bundle types that sell themselves","subtitle":"Choose the perfect bundling strategy for your products","cta_text":"See All Bundle Types in Action","cta_url":""}},"landing_social_proof_pwTFQa":{"type":"landing-social-proof","blocks":{"testimonial_4JMjMw":{"type":"testimonial","settings":{"quote":"Bundlora increased our average order value immediately. Customers love creating their own bundles.","metric":"+42% AOV","author_name":"Sarah Chen","business_type":"Beauty store owner","show_stars":true}},"testimonial_7Awhwq":{"type":"testimonial","settings":{"quote":"Setup was literally 3 minutes. No coding, no hassle. Just instant bundle options for our customers.","metric":"3-minute setup","author_name":"Mike Rodriguez","business_type":"Coffee retailer","show_stars":true}},"testimonial_XWURn3":{"type":"testimonial","settings":{"quote":"Our customers are buying more products per order than ever before. The bundle suggestions are perfect.","metric":"+35% items per order","author_name":"Lisa Thompson","business_type":"Tech accessories shop","show_stars":true}}},"block_order":["testimonial_4JMjMw","testimonial_7Awhwq","testimonial_XWURn3"],"name":"Social Proof","settings":{"title":"Join 2,000+ merchants increasing their AOV","show_trust_badges":true}},"landing_setup_process_rPyMzK":{"type":"landing-setup-process","blocks":{"setup_step_NR68UA":{"type":"setup_step","settings":{"title":"No coding required","description":"Works with any theme automatically. No developers needed, no code changes required.","highlight_text":"100% compatible"}},"setup_step_89jXgJ":{"type":"setup_step","settings":{"title":"Instant setup","description":"Install from the App Store and you're live in under 5 minutes. Zero configuration needed.","highlight_text":"5-minute setup"}},"setup_step_JFhaxf":{"type":"setup_step","settings":{"title":"Free to start","description":"14-day free trial with full features. No credit card, no setup fees, no contracts.","highlight_text":"Risk-free trial"}},"setup_step_CQdeiw":{"type":"setup_step","settings":{"title":"Mobile optimized","description":"Perfect experience on desktop, tablet, and mobile. Your customers will love the interface.","highlight_text":"Any device"}}},"block_order":["setup_step_NR68UA","setup_step_89jXgJ","setup_step_JFhaxf","setup_step_CQdeiw"],"name":"Setup Process","settings":{"title":"Zero-friction setup that works with any theme","subtitle":"Get started in minutes, not hours","cta_text":"Start Your Free Trial Now","cta_url":"","cta_subtext":"No credit card required • Live in under 5 minutes"}}},"order":["main","landing_hero_rFhVTP","landing_problem_solution_dRi48E","landing_bundle_types_XXdDmD","landing_social_proof_pwTFQa","landing_setup_process_rPyMzK"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "settings": {}
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Popular products",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "link",
+        "enable_desktop_slider": true,
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": ["main", "featured-collection"]
+}

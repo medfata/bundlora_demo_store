@@ -1,0 +1,482 @@
+{%- comment -%}
+  Bundle Showcase Section
+  Displays available bundle builders with their discount information
+  
+  Bundlora Integration Ready:
+  - Displays bundle types (quick, volume, guided)
+  - Shows tiered discount information
+  - Links to bundle builder pages
+{%- endcomment -%}
+
+{{ 'component-bundle.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="bundle-showcase color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+      <div class="bundle-showcase__header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {%- if section.settings.title != blank -%}
+          <h2 class="bundle-showcase__title {{ section.settings.heading_size }}">
+            {{ section.settings.title }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <p class="bundle-showcase__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="bundle-showcase__grid grid grid--1-col grid--3-col-desktop"
+      {% if settings.animations_reveal_on_scroll %}
+        data-cascade
+      {% endif %}
+    >
+      {%- for block in section.blocks -%}
+        <div class="bundle-showcase__card grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {{ block.shopify_attributes }}
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: {{ forloop.index }};"
+          {% endif %}
+        >
+          <div class="bundle-card color-{{ block.settings.card_color_scheme }}">
+            {%- if block.settings.image != blank -%}
+              <div class="bundle-card__image-wrapper">
+                {{ block.settings.image | image_url: width: 600 | image_tag:
+                  loading: 'lazy',
+                  widths: '300, 450, 600',
+                  sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw',
+                  class: 'bundle-card__image'
+                }}
+              </div>
+            {%- else -%}
+              <div class="bundle-card__image-wrapper bundle-card__image-wrapper--placeholder">
+                <div class="bundle-card__placeholder">
+                  {%- case block.settings.bundle_type -%}
+                    {%- when 'quick' -%}
+                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                      </svg>
+                    {%- when 'volume' -%}
+                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 01-8 0"/>
+                      </svg>
+                    {%- when 'guided' -%}
+                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 16v-4"/>
+                        <path d="M12 8h.01"/>
+                      </svg>
+                    {%- else -%}
+                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="3" y1="9" x2="21" y2="9"/>
+                        <line x1="9" y1="21" x2="9" y2="9"/>
+                      </svg>
+                    {%- endcase -%}
+                  </div>
+              </div>
+            {%- endif -%}
+
+            <div class="bundle-card__content">
+              {%- if block.settings.badge_text != blank -%}
+                <span class="bundle-card__badge">{{ block.settings.badge_text }}</span>
+              {%- endif -%}
+
+              <h3 class="bundle-card__title h4">{{ block.settings.title }}</h3>
+              
+              {%- if block.settings.description != blank -%}
+                <p class="bundle-card__description">{{ block.settings.description }}</p>
+              {%- endif -%}
+
+              {%- if block.settings.discount_text != blank -%}
+                <div class="bundle-card__discount">
+                  {%- render 'icon-discount' -%}
+                  <span>{{ block.settings.discount_text }}</span>
+                </div>
+              {%- endif -%}
+
+              {%- if block.settings.button_label != blank -%}
+                <a href="{{ block.settings.button_link }}" class="bundle-card__button button{% if block.settings.button_style_secondary %} button--secondary{% endif %}">
+                  {{ block.settings.button_label }}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.show_view_all and section.settings.view_all_link != blank -%}
+      <div class="bundle-showcase__footer">
+        <a href="{{ section.settings.view_all_link }}" class="link underlined-link">
+          {{ section.settings.view_all_text | default: 'View all bundles' }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .bundle-showcase__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .bundle-showcase__title {
+    margin: 0 0 0.5rem;
+  }
+
+  .bundle-showcase__subtitle {
+    margin: 0;
+    opacity: 0.75;
+    max-width: 60ch;
+    margin-inline: auto;
+  }
+
+  .bundle-showcase__grid {
+    gap: 2rem;
+  }
+
+  .bundle-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--product-card-corner-radius);
+    overflow: hidden;
+    background-color: rgb(var(--color-background));
+    box-shadow: 0 2px 8px rgba(var(--color-shadow), 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .bundle-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(var(--color-shadow), 0.12);
+  }
+
+  .bundle-card__image-wrapper {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+
+  .bundle-card__image-wrapper--placeholder {
+    background: linear-gradient(135deg, rgba(var(--color-button), 0.1), rgba(var(--color-button), 0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bundle-card__placeholder {
+    color: rgb(var(--color-button));
+    opacity: 0.5;
+  }
+
+  .bundle-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .bundle-card:hover .bundle-card__image {
+    transform: scale(1.05);
+  }
+
+  .bundle-card__content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bundle-card__badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 100px;
+    margin-bottom: 0.75rem;
+    align-self: flex-start;
+  }
+
+  .bundle-card__title {
+    margin: 0 0 0.5rem;
+  }
+
+  .bundle-card__description {
+    margin: 0 0 1rem;
+    opacity: 0.75;
+    font-size: 1.4rem;
+    flex: 1;
+  }
+
+  .bundle-card__discount {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background-color: rgba(var(--color-button), 0.08);
+    border-radius: var(--inputs-radius);
+    margin-bottom: 1rem;
+    font-weight: 500;
+    color: rgb(var(--color-button));
+  }
+
+  .bundle-card__discount svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  .bundle-card__button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .bundle-showcase__footer {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bundle-card,
+    .bundle-card__image {
+      transition: none;
+    }
+    
+    .bundle-card:hover {
+      transform: none;
+    }
+    
+    .bundle-card:hover .bundle-card__image {
+      transform: none;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Bundle showcase",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Save more with bundles"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Mix and match products to unlock exclusive discounts"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "Small"
+        },
+        {
+          "value": "h1",
+          "label": "Medium"
+        },
+        {
+          "value": "h0",
+          "label": "Large"
+        }
+      ],
+      "default": "h1",
+      "label": "Heading size"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show view all link",
+      "default": false
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View all link"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View all text",
+      "default": "View all bundles"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bundle",
+      "name": "Bundle card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "bundle_type",
+          "options": [
+            {
+              "value": "quick",
+              "label": "Quick bundle"
+            },
+            {
+              "value": "volume",
+              "label": "Volume discount"
+            },
+            {
+              "value": "guided",
+              "label": "Guided bundle"
+            },
+            {
+              "value": "custom",
+              "label": "Custom"
+            }
+          ],
+          "default": "quick",
+          "label": "Bundle type"
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge text",
+          "default": "Most popular"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Build your bundle"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Select your favorite products and save"
+        },
+        {
+          "type": "text",
+          "id": "discount_text",
+          "label": "Discount text",
+          "default": "Save up to 20%"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Start building"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary",
+          "label": "Use secondary button style",
+          "default": false
+        },
+        {
+          "type": "color_scheme",
+          "id": "card_color_scheme",
+          "label": "Card color scheme",
+          "default": "scheme-1"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle showcase",
+      "blocks": [
+        {
+          "type": "bundle",
+          "settings": {
+            "bundle_type": "quick",
+            "badge_text": "Most popular",
+            "title": "Quick bundles",
+            "description": "Build your own bundle in seconds",
+            "discount_text": "Save up to 20%"
+          }
+        },
+        {
+          "type": "bundle",
+          "settings": {
+            "bundle_type": "volume",
+            "badge_text": "",
+            "title": "Volume discounts",
+            "description": "Buy more, save more on every order",
+            "discount_text": "Up to $125 off"
+          }
+        },
+        {
+          "type": "bundle",
+          "settings": {
+            "bundle_type": "guided",
+            "badge_text": "",
+            "title": "Guided bundles",
+            "description": "We help you find the perfect combination",
+            "discount_text": "15% off complete sets"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

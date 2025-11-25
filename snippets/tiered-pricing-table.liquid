@@ -1,0 +1,90 @@
+{%- comment -%}
+  Tiered Pricing Table Snippet
+  Displays volume/quantity-based pricing tiers
+  
+  Usage:
+  {% render 'tiered-pricing-table',
+    tiers: array_of_tier_objects,
+    current_quantity: number,
+    show_savings: boolean,
+    compact: boolean
+  %}
+  
+  Tier object structure:
+  {
+    min_quantity: number,
+    max_quantity: number | null,
+    price: money,
+    discount_percentage: number,
+    discount_type: 'percentage' | 'fixed'
+  }
+  
+  Bundlora Integration Ready:
+  - Supports tiered quantity discounts
+  - Highlights active tier based on current quantity
+  - Accessible table structure with proper ARIA
+{%- endcomment -%}
+
+{%- liquid
+  assign show_savings = show_savings | default: true
+  assign compact = compact | default: false
+  assign current_quantity = current_quantity | default: 1
+-%}
+
+{%- if tiers != blank and tiers.size > 0 -%}
+  <div class="tiered-pricing{% if compact %} tiered-pricing--compact{% endif %}" aria-label="{{ 'products.product.volume_pricing.title' | t }}">
+    <h4 class="tiered-pricing__title">
+      {%- render 'icon-discount' -%}
+      {{ 'products.product.volume_pricing.title' | t }}
+    </h4>
+    
+    <table class="tiered-pricing__table" role="table">
+      <thead class="visually-hidden">
+        <tr>
+          <th scope="col">{{ 'products.product.quantity.label' | t }}</th>
+          <th scope="col">{{ 'products.product.price.regular_price' | t }}</th>
+          {%- if show_savings -%}
+            <th scope="col">{{ 'products.product.price.savings' | t | default: 'Savings' }}</th>
+          {%- endif -%}
+        </tr>
+      </thead>
+      <tbody>
+        {%- for tier in tiers -%}
+          {%- liquid
+            assign is_active = false
+            if tier.max_quantity
+              if current_quantity >= tier.min_quantity and current_quantity <= tier.max_quantity
+                assign is_active = true
+              endif
+            else
+              if current_quantity >= tier.min_quantity
+                assign is_active = true
+              endif
+            endif
+          -%}
+          <tr class="tiered-pricing__item{% if is_active %} tiered-pricing__item--active{% endif %}" {% if is_active %}aria-current="true"{% endif %}>
+            <td class="tiered-pricing__quantity">
+              {%- if tier.max_quantity -%}
+                {{ tier.min_quantity }} - {{ tier.max_quantity }}
+              {%- else -%}
+                {{ tier.min_quantity }}+
+              {%- endif -%}
+            </td>
+            <td class="tiered-pricing__price">
+              {{ tier.price | money }}
+            </td>
+            {%- if show_savings and tier.discount_percentage > 0 -%}
+              <td class="tiered-pricing__discount">
+                {%- if tier.discount_type == 'percentage' -%}
+                  <span class="tiered-pricing__savings-badge">{{ tier.discount_percentage }}% off</span>
+                {%- else -%}
+                  <span class="tiered-pricing__savings-badge">{{ tier.discount_amount | money }} off</span>
+                {%- endif -%}
+              </td>
+            {%- endif -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+  </div>
+{%- endif -%}

@@ -1,0 +1,42 @@
+{%- comment -%}
+  Bundle Discount Badge Snippet
+  Displays tiered pricing and bundle discount information
+  
+  Usage:
+  {% render 'bundle-discount-badge', 
+    discount_type: 'percentage' | 'fixed',
+    discount_value: number,
+    tier_label: string,
+    show_savings: boolean
+  %}
+  
+  Bundlora Integration Ready:
+  - Supports percentage and fixed amount discounts
+  - Displays tiered discount information
+  - Accessible with proper ARIA labels
+{%- endcomment -%}
+
+{%- liquid
+  assign discount_type = discount_type | default: 'percentage'
+  assign discount_value = discount_value | default: 0
+  assign tier_label = tier_label | default: ''
+  assign show_savings = show_savings | default: true
+-%}
+
+{%- if discount_value > 0 -%}
+  <div class="bundle-discount-badge" role="status" aria-label="{{ 'products.product.discount_badge' | t }}">
+    <span class="bundle-discount-badge__icon" aria-hidden="true">
+      {%- render 'icon-discount' -%}
+    </span>
+    <span class="bundle-discount-badge__text">
+      {%- if tier_label != blank -%}
+        <span class="bundle-discount-badge__tier">{{ tier_label }}</span>
+      {%- endif -%}
+      {%- if discount_type == 'percentage' -%}
+        <span class="bundle-discount-badge__value">{{ discount_value }}% off</span>
+      {%- else -%}
+        <span class="bundle-discount-badge__value">{{ discount_value | money }} off</span>
+      {%- endif -%}
+    </span>
+  </div>
+{%- endif -%}
