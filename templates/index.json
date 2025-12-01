@@ -1,55 +1,51 @@
 {
   "sections": {
     "hero": {
-      "type": "image-banner",
+      "type": "rich-text",
       "blocks": {
+        "caption": {
+          "type": "caption",
+          "settings": {
+            "caption": "The #1 Bundle Builder for Shopify"
+          }
+        },
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Build Bundles. Boost Sales.",
-            "heading_size": "h0"
+            "heading": "Turn browsers into buyers with smart product bundles"
           }
         },
-        "subheading": {
+        "text": {
           "type": "text",
           "settings": {
-            "text": "The smartest way to increase average order value. Let customers create their perfect bundles and save—while you earn more per order.",
-            "text_style": "subtitle"
+            "text": "<p>Bundlora helps Shopify merchants increase average order value by 35% with beautiful, customizable bundle builders. No coding required.</p>"
           }
         },
-        "buttons": {
-          "type": "buttons",
+        "button": {
+          "type": "button",
           "settings": {
-            "button_label_1": "Try Bundle Builders",
-            "button_link_1": "#bundle-demos",
-            "button_style_secondary_1": false,
-            "button_label_2": "See How It Works",
-            "button_link_2": "#how-it-works",
-            "button_style_secondary_2": true
+            "button_label": "See Live Demos Below",
+            "button_link": "#demos"
           }
         }
       },
-      "block_order": ["heading", "subheading", "buttons"],
+      "block_order": ["caption", "heading", "text", "button"],
       "settings": {
-        "image_overlay_opacity": 50,
-        "image_height": "large",
-        "desktop_content_position": "middle-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "image_behavior": "none",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 80,
+        "padding_bottom": 60
       }
     },
-    "trust-bar": {
+    "social-proof": {
       "type": "rich-text",
       "blocks": {
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>✓ No coding required · ✓ Works with any theme · ✓ 5-minute setup · ✓ Increase AOV by 30%+</p>"
+            "text": "<p>Trusted by 2,500+ Shopify stores worldwide</p>"
           }
         }
       },
@@ -57,154 +53,53 @@
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-2",
         "full_width": true,
         "padding_top": 20,
         "padding_bottom": 20
       }
     },
-    "bundle-demos-heading": {
-      "type": "rich-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "3 Bundle Types. Endless Possibilities."
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Explore our live bundle builder demos. Click any bundle to see it in action.</p>"
-          }
-        }
-      },
-      "block_order": ["heading", "text"],
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 60,
-        "padding_bottom": 20
-      }
-    },
-    "bundle-demos": {
+    "metrics": {
       "type": "multicolumn",
       "blocks": {
-        "apparel-bundle": {
+        "metric-1": {
           "type": "column",
           "settings": {
-            "title": "Complete the Outfit",
-            "text": "<p><strong>Apparel Bundle Builder</strong></p><p>Mix and match tops, bottoms, and accessories. Customers build their perfect look and save up to 20%.</p><p>● Tiered discounts</p><p>● Smart recommendations</p><p>● Real-time savings display</p>",
-            "link_label": "Try Apparel Bundle →",
-            "link": "/pages/apparel-bundle"
-          }
-        },
-        "home-bundle": {
-          "type": "column",
-          "settings": {
-            "title": "Create Your Perfect Space",
-            "text": "<p><strong>Home & Garden Bundle Builder</strong></p><p>Combine furniture, decor, and outdoor essentials. Transform any space while saving up to 25%.</p><p>● Room-based bundles</p><p>● Volume discounts</p><p>● Free shipping tiers</p>",
-            "link_label": "Try Home Bundle →",
-            "link": "/pages/home-bundle"
-          }
-        },
-        "jewelry-bundle": {
-          "type": "column",
-          "settings": {
-            "title": "Layer Your Look",
-            "text": "<p><strong>Jewelry Bundle Builder</strong></p><p>Stack necklaces, layer bracelets, mix rings. Create signature jewelry combinations and save up to 25%.</p><p>● Layering suggestions</p><p>● Gift set builder</p><p>● Premium packaging</p>",
-            "link_label": "Try Jewelry Bundle →",
-            "link": "/pages/jewelry-bundle"
-          }
-        }
-      },
-      "block_order": ["apparel-bundle", "home-bundle", "jewelry-bundle"],
-      "settings": {
-        "title": "",
-        "heading_size": "h2",
-        "image_width": "full",
-        "image_ratio": "square",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "primary",
-        "button_label": "",
-        "button_link": "",
-        "color_scheme": "scheme-2",
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 28,
-        "padding_bottom": 60
-      }
-    },
-    "how-it-works-heading": {
-      "type": "rich-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "How Bundlora Works"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Simple setup. Powerful results. See your AOV grow in days, not months.</p>"
-          }
-        }
-      },
-      "block_order": ["heading", "text"],
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 60,
-        "padding_bottom": 20
-      }
-    },
-    "how-it-works": {
-      "type": "multicolumn",
-      "blocks": {
-        "step-1": {
-          "type": "column",
-          "settings": {
-            "title": "1. Choose Bundle Type",
-            "text": "<p>Select from Mix & Match, Volume Discounts, or Guided Bundles. Each type is optimized for different product categories.</p>",
+            "title": "+35%",
+            "text": "<p>Average increase in order value</p>",
             "link_label": "",
             "link": ""
           }
         },
-        "step-2": {
+        "metric-2": {
           "type": "column",
           "settings": {
-            "title": "2. Set Your Discounts",
-            "text": "<p>Configure tiered pricing, percentage or fixed discounts, and minimum quantities. Full control over your margins.</p>",
+            "title": "2.4x",
+            "text": "<p>More items per transaction</p>",
             "link_label": "",
             "link": ""
           }
         },
-        "step-3": {
+        "metric-3": {
           "type": "column",
           "settings": {
-            "title": "3. Customize Design",
-            "text": "<p>Match your brand with custom colors, fonts, and layouts. Mobile-optimized and accessible out of the box.</p>",
+            "title": "5 min",
+            "text": "<p>Average setup time</p>",
             "link_label": "",
             "link": ""
           }
         },
-        "step-4": {
+        "metric-4": {
           "type": "column",
           "settings": {
-            "title": "4. Watch Sales Grow",
-            "text": "<p>Customers build bundles, see real-time savings, and checkout with higher cart values. Track everything in your dashboard.</p>",
+            "title": "4.9★",
+            "text": "<p>Rating on Shopify App Store</p>",
             "link_label": "",
             "link": ""
           }
         }
       },
-      "block_order": ["step-1", "step-2", "step-3", "step-4"],
+      "block_order": ["metric-1", "metric-2", "metric-3", "metric-4"],
       "settings": {
         "title": "",
         "heading_size": "h2",
@@ -217,24 +112,24 @@
         "button_link": "",
         "color_scheme": "scheme-1",
         "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 28,
+        "swipe_on_mobile": false,
+        "padding_top": 40,
         "padding_bottom": 60
       }
     },
-    "stats-banner": {
+    "demos-heading": {
       "type": "rich-text",
       "blocks": {
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Proven Results"
+            "heading": "See Bundlora in Action"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p><strong>+32%</strong> Average Order Value · <strong>+45%</strong> Items Per Order · <strong>2.5x</strong> Conversion on Bundle Pages</p>"
+            "text": "<p>Explore our live bundle demos. Each one showcases different bundle types optimized for specific product categories.</p>"
           }
         }
       },
@@ -242,73 +137,46 @@
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-1",
         "full_width": true,
-        "padding_top": 48,
-        "padding_bottom": 48
+        "padding_top": 60,
+        "padding_bottom": 20
       }
     },
-    "features": {
+    "demos": {
       "type": "multicolumn",
       "blocks": {
-        "feature-1": {
+        "demo-1": {
           "type": "column",
           "settings": {
-            "title": "Tiered Discounts",
-            "text": "<p>Set percentage or fixed discounts based on quantity or cart value. Buy 2 save 10%, buy 3 save 15%, and so on.</p>",
-            "link_label": "",
-            "link": ""
+            "title": "Apparel Bundles",
+            "text": "<p><strong>Complete the Outfit</strong></p><p>Let customers mix and match clothing items to build their perfect look. Tiered discounts encourage larger orders.</p><p>Best for: Fashion, Activewear, Uniforms</p>",
+            "link_label": "Try Demo →",
+            "link": "/pages/apparel-bundle"
           }
         },
-        "feature-2": {
+        "demo-2": {
           "type": "column",
           "settings": {
-            "title": "Real-Time Savings",
-            "text": "<p>Customers see exactly how much they're saving as they build their bundle. No surprises at checkout.</p>",
-            "link_label": "",
-            "link": ""
+            "title": "Home & Garden Bundles",
+            "text": "<p><strong>Create Your Space</strong></p><p>Bundle furniture, decor, and outdoor items together. Perfect for room makeovers and seasonal collections.</p><p>Best for: Furniture, Decor, Outdoor</p>",
+            "link_label": "Try Demo →",
+            "link": "/pages/home-bundle"
           }
         },
-        "feature-3": {
+        "demo-3": {
           "type": "column",
           "settings": {
-            "title": "Mobile Optimized",
-            "text": "<p>Beautiful bundle builders that work perfectly on any device. Touch-friendly and fast loading.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "feature-4": {
-          "type": "column",
-          "settings": {
-            "title": "No Code Required",
-            "text": "<p>Install in minutes. Works with any Shopify theme. No developers needed—ever.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "feature-5": {
-          "type": "column",
-          "settings": {
-            "title": "Smart Inventory",
-            "text": "<p>Automatic inventory sync. Out-of-stock items are hidden from bundles automatically.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "feature-6": {
-          "type": "column",
-          "settings": {
-            "title": "Analytics Dashboard",
-            "text": "<p>Track bundle performance, popular combinations, and revenue impact in real-time.</p>",
-            "link_label": "",
-            "link": ""
+            "title": "Jewelry Bundles",
+            "text": "<p><strong>Layer Your Look</strong></p><p>Stack necklaces, layer bracelets, mix earrings. Gift-ready packaging included with every bundle.</p><p>Best for: Jewelry, Accessories, Gifts</p>",
+            "link_label": "Try Demo →",
+            "link": "/pages/jewelry-bundle"
           }
         }
       },
-      "block_order": ["feature-1", "feature-2", "feature-3", "feature-4", "feature-5", "feature-6"],
+      "block_order": ["demo-1", "demo-2", "demo-3"],
       "settings": {
-        "title": "Everything You Need to Sell More",
+        "title": "",
         "heading_size": "h2",
         "image_width": "full",
         "image_ratio": "adapt",
@@ -320,50 +188,152 @@
         "color_scheme": "scheme-2",
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "padding_top": 60,
+        "padding_top": 36,
         "padding_bottom": 60
       }
     },
-    "testimonials": {
+    "features-heading": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Everything You Need to Sell More"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Bundlora comes packed with features designed to maximize your revenue and delight your customers.</p>"
+          }
+        }
+      },
+      "block_order": ["heading", "text"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 60,
+        "padding_bottom": 20
+      }
+    },
+    "features": {
       "type": "multicolumn",
       "blocks": {
-        "testimonial-1": {
+        "feature-1": {
           "type": "column",
           "settings": {
-            "title": "AOV up 40% in 2 weeks",
-            "text": "<p>We installed Bundlora on Monday and saw results by Wednesday. Our customers love building their own outfits.</p><p><strong>— Sarah M., Fashion Boutique</strong></p>",
+            "title": "Flexible Discount Rules",
+            "text": "<p>Set percentage or fixed discounts. Create tiered pricing based on quantity or cart value. Full control over your margins.</p>",
             "link_label": "",
             "link": ""
           }
         },
-        "testimonial-2": {
+        "feature-2": {
           "type": "column",
           "settings": {
-            "title": "Best bundle app we've tried",
-            "text": "<p>We tested 5 different bundle apps. Bundlora was the only one that looked good on mobile and didn't slow down our site.</p><p><strong>— James K., Home Decor Store</strong></p>",
+            "title": "Real-Time Savings Display",
+            "text": "<p>Customers see exactly how much they save as they build bundles. Dynamic pricing updates create urgency and boost conversions.</p>",
             "link_label": "",
             "link": ""
           }
         },
-        "testimonial-3": {
+        "feature-3": {
           "type": "column",
           "settings": {
-            "title": "Setup took 10 minutes",
-            "text": "<p>I'm not technical at all. Had my first bundle live in under 10 minutes. Support team is incredibly helpful too.</p><p><strong>— Maria L., Jewelry Brand</strong></p>",
+            "title": "Mobile-First Design",
+            "text": "<p>Beautiful on every device. Touch-optimized interfaces ensure a seamless experience for the 70% of shoppers on mobile.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "feature-4": {
+          "type": "column",
+          "settings": {
+            "title": "Zero Code Required",
+            "text": "<p>Install in minutes. Works with any Shopify theme out of the box. No developers, no headaches, no ongoing maintenance.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "feature-5": {
+          "type": "column",
+          "settings": {
+            "title": "Smart Inventory Sync",
+            "text": "<p>Automatic inventory management. Out-of-stock items are hidden from bundles instantly. Never oversell again.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "feature-6": {
+          "type": "column",
+          "settings": {
+            "title": "Detailed Analytics",
+            "text": "<p>Track bundle performance, popular combinations, and revenue impact. Make data-driven decisions to optimize your offers.</p>",
             "link_label": "",
             "link": ""
           }
         }
       },
-      "block_order": ["testimonial-1", "testimonial-2", "testimonial-3"],
+      "block_order": ["feature-1", "feature-2", "feature-3", "feature-4", "feature-5", "feature-6"],
       "settings": {
-        "title": "Loved by Merchants",
+        "title": "",
         "heading_size": "h2",
         "image_width": "full",
         "image_ratio": "adapt",
         "columns_desktop": 3,
         "column_alignment": "left",
         "background_style": "primary",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 60
+      }
+    },
+    "how-it-works": {
+      "type": "multicolumn",
+      "blocks": {
+        "step-1": {
+          "type": "column",
+          "settings": {
+            "title": "1. Install the App",
+            "text": "<p>One-click install from the Shopify App Store. Bundlora automatically integrates with your existing theme.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "step-2": {
+          "type": "column",
+          "settings": {
+            "title": "2. Create Your Bundle",
+            "text": "<p>Select products, set discount rules, and customize the look. Our visual builder makes it easy—no coding needed.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "step-3": {
+          "type": "column",
+          "settings": {
+            "title": "3. Publish and Profit",
+            "text": "<p>Go live instantly. Watch your average order value climb as customers discover the joy of bundling.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["step-1", "step-2", "step-3"],
+      "settings": {
+        "title": "Get Started in 3 Simple Steps",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
         "button_label": "",
         "button_link": "",
         "color_scheme": "scheme-1",
@@ -373,36 +343,78 @@
         "padding_bottom": 60
       }
     },
-    "cta-banner": {
+    "testimonials-heading": {
       "type": "rich-text",
       "blocks": {
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Ready to Increase Your AOV?"
+            "heading": "Loved by Shopify Merchants"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Try our bundle builders live. See exactly how they'll work for your store.</p>"
-          }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Explore Bundle Demos",
-            "button_link": "#bundle-demos"
+            "text": "<p>Join thousands of stores already growing their revenue with Bundlora.</p>"
           }
         }
       },
-      "block_order": ["heading", "text", "button"],
+      "block_order": ["heading", "text"],
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-3",
         "full_width": true,
         "padding_top": 60,
+        "padding_bottom": 20
+      }
+    },
+    "testimonials": {
+      "type": "multicolumn",
+      "blocks": {
+        "testimonial-1": {
+          "type": "column",
+          "settings": {
+            "title": "Game changer for our store",
+            "text": "<p>Our AOV jumped 42% in the first month. Customers love building their own bundles, and we love the extra revenue.</p><p><strong>— Emily R.</strong></p><p>Fashion Boutique Owner</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "testimonial-2": {
+          "type": "column",
+          "settings": {
+            "title": "Finally, a bundle app that works",
+            "text": "<p>We tried 4 other apps before Bundlora. This is the only one that looks professional and actually converts.</p><p><strong>— Marcus T.</strong></p><p>Home Goods Store</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "testimonial-3": {
+          "type": "column",
+          "settings": {
+            "title": "Setup was incredibly easy",
+            "text": "<p>Had our first bundle live in under 10 minutes. The support team is responsive and the app just works.</p><p><strong>— Sarah K.</strong></p><p>Jewelry Brand Founder</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["testimonial-1", "testimonial-2", "testimonial-3"],
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-3",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
         "padding_bottom": 60
       }
     },
@@ -412,36 +424,36 @@
         "faq-1": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "How long does setup take?",
+            "heading": "How quickly can I get started?",
             "icon": "clock",
-            "row_content": "<p>Most merchants have their first bundle live in under 10 minutes. No coding required—just select products, set discounts, and publish.</p>",
+            "row_content": "<p>Most merchants have their first bundle live in under 10 minutes. Install the app, select your products, set your discounts, and publish. No coding or technical skills required.</p>",
             "page": ""
           }
         },
         "faq-2": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Will it work with my theme?",
+            "heading": "Will Bundlora work with my theme?",
             "icon": "check_mark",
-            "row_content": "<p>Yes! Bundlora works with all Shopify themes including Dawn, Debut, and custom themes. It automatically adapts to your store's design.</p>",
+            "row_content": "<p>Yes! Bundlora is compatible with all Shopify themes, including Dawn, Debut, and custom themes. It automatically adapts to match your store's design.</p>",
             "page": ""
           }
         },
         "faq-3": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "What discount types are supported?",
+            "heading": "What types of discounts can I offer?",
             "icon": "price_tag",
-            "row_content": "<p>Percentage discounts, fixed amount discounts, tiered pricing based on quantity, and tiered pricing based on cart value. Mix and match as needed.</p>",
+            "row_content": "<p>Bundlora supports percentage discounts, fixed amount discounts, tiered pricing based on quantity, and tiered pricing based on cart value. You can mix and match to create the perfect offer for your products.</p>",
             "page": ""
           }
         },
         "faq-4": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Is it mobile-friendly?",
+            "heading": "Is Bundlora mobile-friendly?",
             "icon": "tablet",
-            "row_content": "<p>Absolutely. All bundle builders are fully responsive and optimized for touch interactions. Over 60% of bundle purchases happen on mobile.</p>",
+            "row_content": "<p>Absolutely. All bundle builders are fully responsive and optimized for touch interactions. Over 60% of bundle purchases happen on mobile devices, and Bundlora is designed for that experience.</p>",
             "page": ""
           }
         },
@@ -450,12 +462,21 @@
           "settings": {
             "heading": "Will it slow down my store?",
             "icon": "lightning_bolt",
-            "row_content": "<p>No. Bundlora is built for performance with lazy loading and optimized code. It won't impact your Lighthouse scores or page speed.</p>",
+            "row_content": "<p>No. Bundlora is built for performance with lazy loading and optimized code. It won't negatively impact your page speed or Lighthouse scores.</p>",
+            "page": ""
+          }
+        },
+        "faq-6": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What kind of support do you offer?",
+            "icon": "chat_bubble",
+            "row_content": "<p>We offer email support with an average response time of under 2 hours during business hours. Our help center includes detailed guides, video tutorials, and best practices for maximizing your bundle revenue.</p>",
             "page": ""
           }
         }
       },
-      "block_order": ["faq-1", "faq-2", "faq-3", "faq-4", "faq-5"],
+      "block_order": ["faq-1", "faq-2", "faq-3", "faq-4", "faq-5", "faq-6"],
       "settings": {
         "caption": "",
         "heading": "Frequently Asked Questions",
@@ -471,47 +492,52 @@
         "padding_bottom": 60
       }
     },
-    "newsletter": {
-      "type": "newsletter",
+    "cta": {
+      "type": "rich-text",
       "blocks": {
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Get Bundle Tips & Updates"
+            "heading": "Ready to Boost Your Average Order Value?"
           }
         },
-        "paragraph": {
-          "type": "paragraph",
+        "text": {
+          "type": "text",
           "settings": {
-            "text": "<p>Join 5,000+ merchants getting weekly tips on increasing AOV with smart bundling strategies.</p>"
+            "text": "<p>Join 2,500+ Shopify merchants who have increased their revenue with Bundlora. Start your free trial today—no credit card required.</p>"
           }
         },
-        "email-form": {
-          "type": "email_form",
-          "settings": {}
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Start Free Trial",
+            "button_link": "https://apps.shopify.com"
+          }
         }
       },
-      "block_order": ["heading", "paragraph", "email-form"],
+      "block_order": ["heading", "text", "button"],
       "settings": {
-        "color_scheme": "scheme-3",
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-4",
         "full_width": true,
-        "padding_top": 48,
-        "padding_bottom": 48
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     }
   },
   "order": [
     "hero",
-    "trust-bar",
-    "bundle-demos-heading",
-    "bundle-demos",
-    "how-it-works-heading",
-    "how-it-works",
-    "stats-banner",
+    "social-proof",
+    "metrics",
+    "demos-heading",
+    "demos",
+    "features-heading",
     "features",
+    "how-it-works",
+    "testimonials-heading",
     "testimonials",
-    "cta-banner",
     "faq",
-    "newsletter"
+    "cta"
   ]
 }

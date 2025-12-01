@@ -1,0 +1,201 @@
+/* ==========================================================================
+   Bundlora Landing Page Styles
+   Professional SaaS-style landing page enhancements
+   ========================================================================== */
+
+/* Hero Section Enhancements */
+.section-hero .rich-text__text {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-hero h2 {
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.section-hero .caption {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  background: rgba(var(--color-button), 0.1);
+  border-radius: 50px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: rgb(var(--color-button));
+  margin-bottom: 1.5rem;
+}
+
+/* Metrics Section - Large Numbers */
+.section-metrics .multicolumn-card__info h3 {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  color: rgb(var(--color-button));
+  margin-bottom: 0.5rem;
+}
+
+.section-metrics .multicolumn-card__info p {
+  font-size: 1.4rem;
+  opacity: 0.8;
+}
+
+/* Demo Cards */
+.section-demos .multicolumn-card {
+  padding: 2rem;
+  border-radius: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section-demos .multicolumn-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+.section-demos .multicolumn-card__info h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+/* Feature Cards */
+.section-features .multicolumn-card__info h3 {
+  font-size: 1.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.section-features .multicolumn-card__info p {
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
+/* How It Works - Step Numbers */
+.section-how-it-works .multicolumn-card__info h3 {
+  font-size: 1.8rem;
+  color: rgb(var(--color-button));
+}
+
+/* Testimonials */
+.section-testimonials .multicolumn-card {
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.section-testimonials .multicolumn-card__info h3 {
+  font-size: 1.6rem;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.section-testimonials .multicolumn-card__info h3::before {
+  content: '"';
+}
+
+.section-testimonials .multicolumn-card__info h3::after {
+  content: '"';
+}
+
+/* FAQ Section */
+.section-faq .accordion__title {
+  font-size: 1.6rem;
+}
+
+/* CTA Section */
+.section-cta h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 1rem;
+}
+
+.section-cta .button {
+  padding: 1.2rem 3rem;
+  font-size: 1.6rem;
+}
+
+/* Social Proof Bar */
+.section-social-proof p {
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+/* General Improvements */
+.rich-text__heading {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rich-text__text p {
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Button Hover Effects */
+.button--primary {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--color-button), 0.3);
+}
+
+/* Link Arrows */
+.multicolumn-card .link {
+  font-weight: 600;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.multicolumn-card .link:hover {
+  transform: translateX(4px);
+}
+
+/* Mobile Optimizations */
+@media screen and (max-width: 749px) {
+  .section-hero {
+    padding-top: 60px !important;
+    padding-bottom: 40px !important;
+  }
+  
+  .section-metrics .multicolumn-card__info h3 {
+    font-size: 2.8rem;
+  }
+  
+  .section-demos .multicolumn-card,
+  .section-testimonials .multicolumn-card {
+    padding: 1.5rem;
+  }
+}
+
+/* Smooth Scroll for Anchor Links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Section Dividers */
+.section-demos,
+.section-features,
+.section-testimonials {
+  position: relative;
+}
+
+/* Gradient Backgrounds for Visual Interest */
+.color-scheme-4 {
+  background: linear-gradient(135deg, rgb(var(--color-background)) 0%, rgba(var(--color-background), 0.95) 100%);
+}
+
+/* Card Shadows */
+.multicolumn-card {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Focus States */
+.multicolumn-card:focus-within {
+  outline: 2px solid rgb(var(--color-button));
+  outline-offset: 4px;
+}

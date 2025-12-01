@@ -253,6 +253,7 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'bundlora-enhancements.css' | asset_url | stylesheet_tag }}
+    {{ 'bundlora-landing.css' | asset_url | stylesheet_tag }}
     {{ 'component-bundle.css' | asset_url | stylesheet_tag: preload: false }}
 
     {%- unless settings.type_body_font.system? -%}
