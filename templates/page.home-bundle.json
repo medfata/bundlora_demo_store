@@ -1,0 +1,149 @@
+{
+  "sections": {
+    "hero": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Create Your Perfect Space"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Transform your home and garden with curated bundles! Mix and match furniture, decor, and outdoor essentials to create your ideal living space.</p>"
+          }
+        }
+      },
+      "block_order": ["heading", "text"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 48,
+        "padding_bottom": 28
+      }
+    },
+    "discount-tiers": {
+      "type": "rich-text",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p style=\"font-size: 1.1em;\"><span style=\"background: #D1FAE5; padding: 8px 16px; border-radius: 20px; margin: 0 8px;\">2 items: <strong>10% off</strong></span> <span style=\"background: #D1FAE5; padding: 8px 16px; border-radius: 20px; margin: 0 8px;\">3 items: <strong>15% off</strong></span> <span style=\"background: #10B981; color: white; padding: 8px 16px; border-radius: 20px; margin: 0 8px;\">4+ items: <strong>25% off</strong></span></p>"
+          }
+        }
+      },
+      "block_order": ["text"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "bundle-builder": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Select Your Items",
+        "heading_size": "h2",
+        "description": "Click items to add them to your bundle",
+        "show_description": true,
+        "description_style": "body",
+        "collection": "home-garden",
+        "products_to_show": 12,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "link",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "features": {
+      "type": "multicolumn",
+      "blocks": {
+        "feature-1": {
+          "type": "column",
+          "settings": {
+            "title": "Room-Based Bundles",
+            "text": "<p>Build bundles by room—living room, bedroom, outdoor patio. We'll suggest items that complement each other.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "feature-2": {
+          "type": "column",
+          "settings": {
+            "title": "Volume Discounts",
+            "text": "<p>The more you add, the more you save. Perfect for furnishing multiple rooms at once.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "feature-3": {
+          "type": "column",
+          "settings": {
+            "title": "Free Shipping",
+            "text": "<p>All bundles of 3+ items include free shipping. Even on large furniture pieces.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["feature-1", "feature-2", "feature-3"],
+      "settings": {
+        "title": "Bundle Benefits",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "back-link": {
+      "type": "rich-text",
+      "blocks": {
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "← Back to All Bundle Demos",
+            "button_link": "/"
+          }
+        }
+      },
+      "block_order": ["button"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 24,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": ["hero", "discount-tiers", "bundle-builder", "features", "back-link"]
+}
