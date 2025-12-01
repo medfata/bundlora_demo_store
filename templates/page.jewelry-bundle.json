@@ -32,7 +32,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p style=\"font-size: 1.1em;\"><span style=\"background: #FEF3C7; padding: 8px 16px; border-radius: 20px; margin: 0 8px;\">2 pieces: <strong>15% off</strong></span> <span style=\"background: #FEF3C7; padding: 8px 16px; border-radius: 20px; margin: 0 8px;\">3 pieces: <strong>20% off</strong></span> <span style=\"background: #D97706; color: white; padding: 8px 16px; border-radius: 20px; margin: 0 8px;\">4+ pieces: <strong>25% off</strong></span></p>"
+            "text": "<p><strong>2 pieces: 15% off</strong> · <strong>3 pieces: 20% off</strong> · <strong>4+ pieces: 25% off</strong></p>"
           }
         }
       },
@@ -40,7 +40,7 @@
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-3",
         "full_width": true,
         "padding_top": 24,
         "padding_bottom": 24
@@ -51,8 +51,8 @@
       "settings": {
         "title": "Select Your Pieces",
         "heading_size": "h2",
-        "description": "Click items to add them to your bundle",
-        "show_description": true,
+        "description": "",
+        "show_description": false,
         "description_style": "body",
         "collection": "jewelry",
         "products_to_show": 12,
