@@ -1,32 +1,24 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "home-landing": {
       "type": "home-landing",
       "settings": {
-        "nav_cta_label": "See a live demo",
-        "nav_cta_link": "/pages/apparel-bundle",
         "hero_eyebrow": "Build-your-own-bundle for Shopify",
         "hero_heading": "Customers build the bundle.",
         "hero_heading_accent": "You grow the order.",
         "hero_subtext": "Bundlora gives your store a dedicated builder page where shoppers mix and match their own bundle — with a discount that applies automatically at checkout. No code, no theme edits.",
         "hero_button_label": "See it on a real store",
-        "hero_button_link": "/pages/apparel-bundle",
+        "hero_button_link": "https://apps.shopify.com/bundlora",
+        "hero_secondary_label": "How it works",
+        "nav_cta_label": "See a live demo",
+        "nav_cta_link": "https://apps.shopify.com/bundlora",
         "demo_apparel_link": "/pages/apparel-bundle",
         "demo_jewelry_link": "/pages/jewelry-bundle",
         "demo_home_link": "/pages/home-bundle",
         "cta_heading": "Give your shoppers a bundle to build.",
         "cta_text": "Try a live builder the way your customers would — then bring one to your own store.",
         "cta_button_label": "See it on a real store",
-        "cta_button_link": "/pages/apparel-bundle"
+        "cta_button_link": "https://apps.shopify.com/bundlora"
       }
     }
   },

@@ -46,7 +46,7 @@
         <a href="{{ root }}#demos">Store demos</a>
         <a href="{{ root }}#faq">FAQ</a>
       </nav>
-      <a href="{{ nav_link }}" class="bndl-btn bndl-btn-primary bndl-btn-sm">{{ section.settings.nav_cta_label | default: 'See a live demo' }}</a>
+      <a href="{{ nav_link }}" class="bndl-btn bndl-btn-white bndl-btn-sm" target="_blank" rel="noopener">{{ section.settings.nav_cta_label | default: 'See a live demo' }}</a>
     </div>
   </header>
 </div>
@@ -72,6 +72,8 @@
   .bndl-btn-sm{padding:10px 16px;font-size:14px;border-radius:10px;}
   .bndl-btn-primary{background:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(110,78,240,0.26);}
   .bndl-btn-primary:hover{background:var(--accent-d);color:#fff;transform:translateY(-2px);box-shadow:0 10px 26px rgba(110,78,240,0.34);}
+  .bndl-btn-white{background:#fff;color:var(--accent);border-color:var(--line-2);box-shadow:0 6px 18px rgba(25,20,48,0.10);}
+  .bndl-btn-white:hover{background:#fff;color:var(--accent-d);border-color:var(--accent);transform:translateY(-2px);box-shadow:0 10px 26px rgba(25,20,48,0.14);}
 
   .bndl-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.85);backdrop-filter:saturate(160%) blur(12px);-webkit-backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid transparent;transition:border-color .25s ease,box-shadow .25s ease;}
   .bndl-nav.bndl-nav-stuck{border-bottom-color:var(--line);box-shadow:var(--sh-sm);}

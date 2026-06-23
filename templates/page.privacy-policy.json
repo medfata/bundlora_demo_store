@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "bundlora-privacy",
+      "settings": {
+        "last_updated": "June 23, 2026"
+      }
+    }
+  },
+  "order": ["main"]
+}

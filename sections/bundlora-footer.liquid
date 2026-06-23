@@ -10,9 +10,7 @@
   assign root         = routes.root_url
   assign hero_link    = section.settings.hero_button_link  | default: '/pages/apparel-bundle'
   assign nav_link     = section.settings.nav_cta_link      | default: hero_link
-  assign demo_apparel = section.settings.demo_apparel_link | default: '/pages/apparel-bundle'
-  assign demo_jewelry = section.settings.demo_jewelry_link | default: '/pages/jewelry-bundle'
-  assign demo_home    = section.settings.demo_home_link    | default: '/pages/home-bundle'
+  assign install_link = 'https://apps.shopify.com/bundlora'
 -%}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,15 +36,13 @@
           <a href="{{ root }}#faq">FAQ</a>
         </div>
         <div class="bndl-foot-col">
-          <h5>Demos</h5>
-          <a href="{{ demo_apparel }}">Apparel bundle</a>
-          <a href="{{ demo_jewelry }}">Jewelry bundle</a>
-          <a href="{{ demo_home }}">Home &amp; garden bundle</a>
+          <h5>Get started</h5>
+          <a href="{{ install_link }}" target="_blank" rel="noopener">Try a live demo</a>
+          <a href="{{ install_link }}" target="_blank" rel="noopener">{{ section.settings.nav_cta_label | default: 'See a live demo' }}</a>
         </div>
         <div class="bndl-foot-col">
-          <h5>Get started</h5>
-          <a href="{{ hero_link }}">Try a live demo</a>
-          <a href="{{ nav_link }}">{{ section.settings.nav_cta_label | default: 'See a live demo' }}</a>
+          <h5>Legal</h5>
+          <a href="{{ root }}pages/privacy-policy">Privacy Policy</a>
         </div>
       </div>
       <div class="bndl-foot-bottom">
@@ -99,11 +95,7 @@
     { "type": "textarea", "id": "blurb", "label": "Footer blurb", "default": "The bundle builder that helps Shopify merchants sell more per order — without touching code." },
     { "type": "text", "id": "nav_cta_label", "label": "Get-started button label", "default": "See a live demo" },
     { "type": "url", "id": "nav_cta_link", "label": "Get-started link" },
-    { "type": "url", "id": "hero_button_link", "label": "\"Try a live demo\" link", "info": "Defaults to the apparel bundle demo." },
-    { "type": "header", "content": "Demo links" },
-    { "type": "url", "id": "demo_apparel_link", "label": "Apparel demo link" },
-    { "type": "url", "id": "demo_jewelry_link", "label": "Jewelry demo link" },
-    { "type": "url", "id": "demo_home_link", "label": "Home & garden demo link" }
+    { "type": "url", "id": "hero_button_link", "label": "\"Try a live demo\" link", "info": "Defaults to the apparel bundle demo." }
   ]
 }
 {% endschema %}
