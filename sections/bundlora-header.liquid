@@ -1,0 +1,114 @@
+{% comment %}
+  Bundlora — shared theme header (nav).
+  Lives in the header-group so EVERY page that uses the theme layout
+  (home, /pages/* demos, and the /apps/bundlora/* app-proxy builder pages)
+  shows the same Bundlora nav. Anchor links point at the home page (routes.root_url)
+  so they work from any page.
+{% endcomment %}
+
+{%- liquid
+  assign logo_img  = section.settings.logo_image
+  assign root      = routes.root_url
+  assign nav_link  = section.settings.nav_cta_link | default: '/pages/apparel-bundle'
+-%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+{%- comment -%}
+  Cart-drawer assets. theme.liquid renders <cart-drawer> globally when
+  settings.cart_type == 'drawer'. Dawn loaded the hiding CSS + custom-element JS
+  from its header section, which this section replaces — so we load them here,
+  otherwise the empty drawer renders inline as blank space at the top of the page.
+{%- endcomment -%}
+{%- if settings.cart_type == 'drawer' -%}
+  {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
+  {{ 'component-cart.css' | asset_url | stylesheet_tag }}
+  {{ 'component-cart-items.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<div class="bndl">
+  <header class="bndl-nav" id="bndl-nav">
+    <div class="bndl-wrap bndl-nav-in">
+      <a href="{{ root }}" class="bndl-brand" aria-label="Bundlora home">
+        {%- if logo_img -%}
+          {{ logo_img | image_url: width: 72 | image_tag: alt: 'Bundlora', class: 'bndl-brand-mark', width: 30, height: 30 }}
+        {%- else -%}
+          <img class="bndl-brand-mark" src="{{ 'bundlora-logo.png' | asset_url }}" width="30" height="30" alt="Bundlora" loading="eager">
+        {%- endif -%}
+        <span class="bndl-brand-name">Bundlora</span>
+      </a>
+      <nav class="bndl-nav-links" aria-label="Primary">
+        <a href="{{ root }}#how">How it works</a>
+        <a href="{{ root }}#types">Builder types</a>
+        <a href="{{ root }}#demos">Store demos</a>
+        <a href="{{ root }}#faq">FAQ</a>
+      </nav>
+      <a href="{{ nav_link }}" class="bndl-btn bndl-btn-primary bndl-btn-sm">{{ section.settings.nav_cta_label | default: 'See a live demo' }}</a>
+    </div>
+  </header>
+</div>
+
+<style>
+  .bndl{
+    --ink:#191430; --ink-2:#2f2a45; --muted:#6b6780; --faint:#9a96ad;
+    --paper:#ffffff; --paper-2:#faf9fe; --paper-3:#f3f0fb;
+    --accent:#6e4ef0; --accent-d:#5a3fd0; --accent-soft:#efeafe;
+    --line:rgba(25,20,48,0.09); --line-2:rgba(25,20,48,0.14);
+    --sh-sm:0 1px 2px rgba(25,20,48,0.05);
+    --ff:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    --disp:"Bricolage Grotesque",var(--ff);
+    font-family:var(--ff);color:var(--ink);line-height:1.6;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  .bndl *{box-sizing:border-box;}
+  .bndl a{color:inherit;text-decoration:none;}
+  .bndl img{display:block;max-width:100%;}
+  .bndl-wrap{width:100%;max-width:1140px;margin:0 auto;padding:0 28px;}
+
+  .bndl-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--ff);font-size:15px;font-weight:600;border-radius:11px;padding:12px 20px;border:1px solid transparent;cursor:pointer;transition:transform .16s ease,background .18s ease,box-shadow .18s ease,border-color .18s ease;white-space:nowrap;}
+  .bndl-btn-sm{padding:10px 16px;font-size:14px;border-radius:10px;}
+  .bndl-btn-primary{background:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(110,78,240,0.26);}
+  .bndl-btn-primary:hover{background:var(--accent-d);color:#fff;transform:translateY(-2px);box-shadow:0 10px 26px rgba(110,78,240,0.34);}
+
+  .bndl-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.85);backdrop-filter:saturate(160%) blur(12px);-webkit-backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid transparent;transition:border-color .25s ease,box-shadow .25s ease;}
+  .bndl-nav.bndl-nav-stuck{border-bottom-color:var(--line);box-shadow:var(--sh-sm);}
+  .bndl-nav-in{display:flex;align-items:center;gap:24px;height:68px;}
+  .bndl-brand{display:inline-flex;align-items:center;gap:10px;}
+  .bndl-brand-mark{width:30px;height:30px;border-radius:8px;display:block;}
+  .bndl-brand-name{font-family:var(--disp);font-weight:800;font-size:19px;letter-spacing:-0.03em;color:var(--ink);}
+  .bndl-nav-links{margin-left:auto;display:flex;gap:30px;}
+  .bndl-nav-links a{font-size:14.5px;font-weight:500;color:var(--muted);transition:color .15s ease;}
+  .bndl-nav-links a:hover{color:var(--ink);}
+  .bndl-nav .bndl-btn-sm{margin-left:4px;}
+
+  @media (max-width:640px){
+    .bndl-wrap{padding:0 20px;}
+    .bndl-nav-links{display:none;}
+    .bndl-nav-in{gap:0;}
+    .bndl-nav .bndl-btn-sm{margin-left:auto;}
+  }
+</style>
+
+<script>
+  (function(){
+    var nav = document.getElementById('bndl-nav');
+    if (!nav) return;
+    var onScroll = function(){ nav.classList.toggle('bndl-nav-stuck', window.scrollY > 8); };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Bundlora header",
+  "settings": [
+    { "type": "image_picker", "id": "logo_image", "label": "Logo (optional)", "info": "Defaults to the Bundlora mark." },
+    { "type": "text", "id": "nav_cta_label", "label": "Nav button label", "default": "See a live demo" },
+    { "type": "url", "id": "nav_cta_link", "label": "Nav button link", "info": "Defaults to the apparel bundle demo." }
+  ]
+}
+{% endschema %}

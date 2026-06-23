@@ -1,0 +1,109 @@
+{% comment %}
+  Bundlora — shared theme footer.
+  Lives in the footer-group so EVERY page that uses the theme layout
+  (home, /pages/* demos, and the /apps/bundlora/* app-proxy builder pages)
+  shows the same Bundlora footer. Explore links point at the home page
+  (routes.root_url) so anchors work from any page.
+{% endcomment %}
+
+{%- liquid
+  assign root         = routes.root_url
+  assign hero_link    = section.settings.hero_button_link  | default: '/pages/apparel-bundle'
+  assign nav_link     = section.settings.nav_cta_link      | default: hero_link
+  assign demo_apparel = section.settings.demo_apparel_link | default: '/pages/apparel-bundle'
+  assign demo_jewelry = section.settings.demo_jewelry_link | default: '/pages/jewelry-bundle'
+  assign demo_home    = section.settings.demo_home_link    | default: '/pages/home-bundle'
+-%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<div class="bndl">
+  <footer class="bndl-footer">
+    <div class="bndl-wrap">
+      <div class="bndl-foot-grid">
+        <div class="bndl-foot-brand">
+          <a href="{{ root }}" class="bndl-brand">
+            <img class="bndl-brand-mark" src="{{ 'bundlora-logo.png' | asset_url }}" width="30" height="30" alt="Bundlora" loading="lazy">
+            <span class="bndl-brand-name">Bundlora</span>
+          </a>
+          <p class="bndl-foot-blurb">{{ section.settings.blurb | default: 'The bundle builder that helps Shopify merchants sell more per order — without touching code.' }}</p>
+        </div>
+        <div class="bndl-foot-col">
+          <h5>Explore</h5>
+          <a href="{{ root }}#how">How it works</a>
+          <a href="{{ root }}#types">Builder types</a>
+          <a href="{{ root }}#demos">Store demos</a>
+          <a href="{{ root }}#faq">FAQ</a>
+        </div>
+        <div class="bndl-foot-col">
+          <h5>Demos</h5>
+          <a href="{{ demo_apparel }}">Apparel bundle</a>
+          <a href="{{ demo_jewelry }}">Jewelry bundle</a>
+          <a href="{{ demo_home }}">Home &amp; garden bundle</a>
+        </div>
+        <div class="bndl-foot-col">
+          <h5>Get started</h5>
+          <a href="{{ hero_link }}">Try a live demo</a>
+          <a href="{{ nav_link }}">{{ section.settings.nav_cta_label | default: 'See a live demo' }}</a>
+        </div>
+      </div>
+      <div class="bndl-foot-bottom">
+        <span>&copy; {{ 'now' | date: '%Y' }} Bundlora. Demo store — not affiliated with Shopify Inc.</span>
+        <span>Built for the Shopify App Store</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<style>
+  .bndl{
+    --ink:#191430; --ink-2:#2f2a45; --muted:#6b6780; --faint:#9a96ad;
+    --paper:#ffffff; --paper-2:#faf9fe; --paper-3:#f3f0fb;
+    --accent:#6e4ef0; --accent-d:#5a3fd0;
+    --line:rgba(25,20,48,0.09); --line-2:rgba(25,20,48,0.14);
+    --ff:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    --disp:"Bricolage Grotesque",var(--ff);
+    font-family:var(--ff);color:var(--ink);line-height:1.6;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  .bndl *{box-sizing:border-box;}
+  .bndl h5{margin:0;}
+  .bndl p{margin:0;}
+  .bndl a{color:inherit;text-decoration:none;}
+  .bndl img{display:block;max-width:100%;}
+  .bndl-wrap{width:100%;max-width:1140px;margin:0 auto;padding:0 28px;}
+  .bndl-brand{display:inline-flex;align-items:center;gap:10px;}
+  .bndl-brand-mark{width:30px;height:30px;border-radius:8px;display:block;}
+  .bndl-brand-name{font-family:var(--disp);font-weight:800;font-size:19px;letter-spacing:-0.03em;color:var(--ink);}
+
+  .bndl-footer{border-top:1px solid var(--line);background:var(--paper-2);padding:72px 0 40px;}
+  .bndl-foot-grid{display:grid;grid-template-columns:1.7fr repeat(3,1fr);gap:40px;}
+  .bndl-foot-blurb{margin-top:18px;font-size:14.5px;color:var(--muted);max-width:280px;line-height:1.65;}
+  .bndl-foot-col h5{font-family:var(--ff);font-size:11.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint);margin:0 0 16px;}
+  .bndl-foot-col a{display:block;font-size:14.5px;color:var(--muted);margin-bottom:12px;transition:color .15s ease;}
+  .bndl-foot-col a:hover{color:var(--ink);}
+  .bndl-foot-bottom{margin-top:52px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--faint);}
+
+  @media (max-width:640px){
+    .bndl-wrap{padding:0 20px;}
+    .bndl-foot-grid{grid-template-columns:1fr 1fr;gap:28px;}
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Bundlora footer",
+  "settings": [
+    { "type": "textarea", "id": "blurb", "label": "Footer blurb", "default": "The bundle builder that helps Shopify merchants sell more per order — without touching code." },
+    { "type": "text", "id": "nav_cta_label", "label": "Get-started button label", "default": "See a live demo" },
+    { "type": "url", "id": "nav_cta_link", "label": "Get-started link" },
+    { "type": "url", "id": "hero_button_link", "label": "\"Try a live demo\" link", "info": "Defaults to the apparel bundle demo." },
+    { "type": "header", "content": "Demo links" },
+    { "type": "url", "id": "demo_apparel_link", "label": "Apparel demo link" },
+    { "type": "url", "id": "demo_jewelry_link", "label": "Jewelry demo link" },
+    { "type": "url", "id": "demo_home_link", "label": "Home & garden demo link" }
+  ]
+}
+{% endschema %}

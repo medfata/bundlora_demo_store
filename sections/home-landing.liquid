@@ -32,27 +32,6 @@
 
 <div class="bndl">
 
-  {%- comment -%} ===================== NAV ===================== {%- endcomment -%}
-  <header class="bndl-nav" id="bndl-nav">
-    <div class="bndl-wrap bndl-nav-in">
-      <a href="{{ routes.root_url }}" class="bndl-brand" aria-label="Bundlora home">
-        {%- if logo_img -%}
-          {{ logo_img | image_url: width: 72 | image_tag: alt: 'Bundlora', class: 'bndl-brand-mark', width: 30, height: 30 }}
-        {%- else -%}
-          <img class="bndl-brand-mark" src="{{ 'bundlora-logo.png' | asset_url }}" width="30" height="30" alt="Bundlora" loading="eager">
-        {%- endif -%}
-        <span class="bndl-brand-name">Bundlora</span>
-      </a>
-      <nav class="bndl-nav-links" aria-label="Primary">
-        <a href="#how">How it works</a>
-        <a href="#types">Builder types</a>
-        <a href="#demos">Store demos</a>
-        <a href="#faq">FAQ</a>
-      </nav>
-      <a href="{{ nav_link }}" class="bndl-btn bndl-btn-primary bndl-btn-sm">{{ section.settings.nav_cta_label | default: 'See a live demo' }}</a>
-    </div>
-  </header>
-
   {%- comment -%} ===================== HERO ===================== {%- endcomment -%}
   <section class="bndl-hero">
     <div class="bndl-wrap bndl-hero-in">
@@ -90,6 +69,55 @@
     </div>
   </section>
 
+  {%- comment -%} ===================== THREE BUILDER TYPES ===================== {%- endcomment -%}
+  <section class="bndl-sec bndl-types" id="types">
+    <div class="bndl-wrap">
+      <div class="bndl-lead bndl-reveal">
+        <div class="bndl-kick">{{ bndl_cube }}Three ways to build</div>
+        <h2>One app, three builder types</h2>
+        <p>Pick the format that fits your products.</p>
+      </div>
+      <div class="bndl-ways">
+        <a class="bndl-way bndl-way--link bndl-reveal" href="https://startup-apps.myshopify.com/apps/bundlora/simple-bundle-builder" target="_blank" rel="noopener" data-type="simple">
+          <div class="bndl-way-shot">
+            <span class="bndl-way-bar" aria-hidden="true"><i class="bndl-way-dot"></i><i class="bndl-way-dot"></i><i class="bndl-way-dot"></i></span>
+            <div class="bndl-way-view">
+              <iframe class="bndl-way-screen" title="Simple bundle builder with one flat discount" loading="lazy" referrerpolicy="no-referrer" tabindex="-1" aria-hidden="true" scrolling="no"></iframe>
+            </div>
+          </div>
+          <div class="bndl-way-body">
+            <h3>Simple bundle</h3>
+            <p>Pick any mix, unlock one flat discount.</p>
+          </div>
+        </a>
+        <a class="bndl-way bndl-way--link bndl-reveal" href="https://startup-apps.myshopify.com/apps/bundlora/discount-bundle-builder" target="_blank" rel="noopener" data-type="tiered">
+          <div class="bndl-way-shot">
+            <span class="bndl-way-bar" aria-hidden="true"><i class="bndl-way-dot"></i><i class="bndl-way-dot"></i><i class="bndl-way-dot"></i></span>
+            <div class="bndl-way-view">
+              <iframe class="bndl-way-screen" title="Tiered bundle builder with quantity tiers" loading="lazy" referrerpolicy="no-referrer" tabindex="-1" aria-hidden="true" scrolling="no"></iframe>
+            </div>
+          </div>
+          <div class="bndl-way-body">
+            <h3>Tiered bundle</h3>
+            <p>The more they add, the more they save.</p>
+          </div>
+        </a>
+        <a class="bndl-way bndl-way--link bndl-reveal" href="https://startup-apps.myshopify.com/apps/bundlora/gifted-bundle-builder" target="_blank" rel="noopener" data-type="bogo">
+          <div class="bndl-way-shot">
+            <span class="bndl-way-bar" aria-hidden="true"><i class="bndl-way-dot"></i><i class="bndl-way-dot"></i><i class="bndl-way-dot"></i></span>
+            <div class="bndl-way-view">
+              <iframe class="bndl-way-screen" title="Buy one get one bundle builder" loading="lazy" referrerpolicy="no-referrer" tabindex="-1" aria-hidden="true" scrolling="no"></iframe>
+            </div>
+          </div>
+          <div class="bndl-way-body">
+            <h3>Buy 1, get 1</h3>
+            <p>Buy a set — the cheapest item is free.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
   {%- comment -%} ===================== THE SHIFT / SHOWCASE ===================== {%- endcomment -%}
   <section class="bndl-sec bndl-show" id="how">
     <div class="bndl-wrap bndl-show-in">
@@ -119,40 +147,6 @@
             <iframe class="bndl-show-phone-screen" title="The Bundlora bundle builder on mobile" loading="lazy" referrerpolicy="no-referrer"></iframe>
           </div>
         </figure>
-      </div>
-    </div>
-  </section>
-
-  {%- comment -%} ===================== THREE BUILDER TYPES ===================== {%- endcomment -%}
-  <section class="bndl-sec bndl-types" id="types">
-    <div class="bndl-wrap">
-      <div class="bndl-lead bndl-reveal">
-        <div class="bndl-kick">{{ bndl_cube }}Three ways to build</div>
-        <h2>One app, three builder types</h2>
-        <p>Pick the format that fits your products.</p>
-      </div>
-      <div class="bndl-ways">
-        <a class="bndl-way bndl-way--link bndl-reveal" href="https://startup-apps.myshopify.com/apps/bundlora/simple-bundle-builder" target="_blank" rel="noopener">
-          <div class="bndl-way-shot"><img src="{{ 'bundlora-type-simple.png' | asset_url }}" width="1200" height="640" alt="Simple bundle builder with one flat discount" loading="lazy"></div>
-          <div class="bndl-way-body">
-            <h3>Simple bundle</h3>
-            <p>Pick any mix, unlock one flat discount.</p>
-          </div>
-        </a>
-        <a class="bndl-way bndl-way--link bndl-reveal" href="https://startup-apps.myshopify.com/apps/bundlora/discount-bundle-builder" target="_blank" rel="noopener">
-          <div class="bndl-way-shot"><img src="{{ 'bundlora-type-tiered.png' | asset_url }}" width="1200" height="640" alt="Tiered bundle builder with quantity tiers" loading="lazy"></div>
-          <div class="bndl-way-body">
-            <h3>Tiered bundle</h3>
-            <p>The more they add, the more they save.</p>
-          </div>
-        </a>
-        <a class="bndl-way bndl-way--link bndl-reveal" href="https://startup-apps.myshopify.com/apps/bundlora/gifted-bundle-builder" target="_blank" rel="noopener">
-          <div class="bndl-way-shot"><img src="{{ 'bundlora-type-bogo.png' | asset_url }}" width="1200" height="640" alt="Buy one get one bundle builder" loading="lazy"></div>
-          <div class="bndl-way-body">
-            <h3>Buy 1, get 1</h3>
-            <p>Buy a set — the cheapest item is free.</p>
-          </div>
-        </a>
       </div>
     </div>
   </section>
@@ -261,43 +255,6 @@
     </div>
   </section>
 
-  {%- comment -%} ===================== FOOTER ===================== {%- endcomment -%}
-  <footer class="bndl-footer">
-    <div class="bndl-wrap">
-      <div class="bndl-foot-grid">
-        <div class="bndl-foot-brand">
-          <a href="{{ routes.root_url }}" class="bndl-brand">
-            <img class="bndl-brand-mark" src="{{ 'bundlora-logo.png' | asset_url }}" width="30" height="30" alt="Bundlora" loading="lazy">
-            <span class="bndl-brand-name">Bundlora</span>
-          </a>
-          <p class="bndl-foot-blurb">The bundle builder that helps Shopify merchants sell more per order — without touching code.</p>
-        </div>
-        <div class="bndl-foot-col">
-          <h5>Explore</h5>
-          <a href="#how">How it works</a>
-          <a href="#types">Builder types</a>
-          <a href="#demos">Store demos</a>
-          <a href="#faq">FAQ</a>
-        </div>
-        <div class="bndl-foot-col">
-          <h5>Demos</h5>
-          <a href="{{ demo_apparel }}">Apparel bundle</a>
-          <a href="{{ demo_jewelry }}">Jewelry bundle</a>
-          <a href="{{ demo_home }}">Home &amp; garden bundle</a>
-        </div>
-        <div class="bndl-foot-col">
-          <h5>Get started</h5>
-          <a href="{{ hero_link }}">Try a live demo</a>
-          <a href="{{ nav_link }}">{{ section.settings.nav_cta_label | default: 'See a live demo' }}</a>
-        </div>
-      </div>
-      <div class="bndl-foot-bottom">
-        <span>&copy; {{ 'now' | date: '%Y' }} Bundlora. Demo store — not affiliated with Shopify Inc.</span>
-        <span>Built for the Shopify App Store</span>
-      </div>
-    </div>
-  </footer>
-
 </div>
 
 <style>
@@ -326,10 +283,6 @@
   .bndl em{font-style:italic;color:var(--ink);}
   .bndl-wrap{width:100%;max-width:1140px;margin:0 auto;padding:0 28px;}
   .bndl-cube{color:var(--accent);vertical-align:-2px;}
-
-  /* hide theme header + footer on this landing only */
-  .shopify-section-group-header-group,
-  .shopify-section-group-footer-group{display:none!important;}
 
   /* eyebrow / section kicker */
   .bndl-eyebrow,.bndl-kick{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:0.02em;color:var(--accent-d);}
@@ -419,13 +372,16 @@
   .bndl-show-phone-view{position:relative;width:100%;height:100%;overflow:hidden;}
   .bndl-show-phone-screen{position:absolute;top:0;left:0;width:390px;height:822px;border:0;display:block;background:#fafafa;transform:scale(0.35385);transform-origin:top left;}
 
-  /* three builder types — screenshot cards */
+  /* three builder types — real mobile builder shown as a static phone screenshot */
   .bndl-ways{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
   .bndl-way{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;}
   .bndl-way--link{display:block;cursor:pointer;text-decoration:none;color:inherit;}
   .bndl-way:hover{transform:translateY(-4px);box-shadow:var(--sh);border-color:var(--line-2);}
-  .bndl-way-shot{aspect-ratio:1200/640;background:var(--paper-2);border-bottom:1px solid var(--line);overflow:hidden;}
-  .bndl-way-shot img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+  .bndl-way-shot{position:relative;border-bottom:1px solid var(--line);overflow:hidden;background:#fafafa;}
+  .bndl-way-bar{display:flex;align-items:center;gap:6px;height:28px;padding:0 13px;background:var(--paper-3);border-bottom:1px solid var(--line);}
+  .bndl-way-dot{width:7px;height:7px;border-radius:50%;background:var(--line-2);flex:0 0 auto;}
+  .bndl-way-view{position:relative;width:100%;aspect-ratio:1200/800;overflow:hidden;background:#fafafa;}
+  .bndl-way-screen{position:absolute;top:0;left:0;width:1200px;height:1000px;border:0;display:block;background:#fafafa;transform:scale(var(--way-s,0.29));transform-origin:top left;pointer-events:none;}
   .bndl-way-body{padding:22px 24px 26px;}
   .bndl-way h3{font-size:19px;font-weight:700;}
   .bndl-way-body p{margin-top:7px;color:var(--muted);font-size:15px;line-height:1.55;}
@@ -538,12 +494,6 @@
     document.querySelectorAll('.bndl-reveal').forEach(function(el){
       if (io) { io.observe(el); } else { el.classList.add('bndl-in'); }
     });
-    var nav = document.getElementById('bndl-nav');
-    if (nav) {
-      var onScroll = function(){ nav.classList.toggle('bndl-nav-stuck', window.scrollY > 8); };
-      onScroll();
-      window.addEventListener('scroll', onScroll, { passive: true });
-    }
   })();
 </script>
 
@@ -606,6 +556,43 @@
     }
     (function init(n){
       if (window.BUNDLORA_REAL_BUILDERS && window.BUNDLORA_REAL_BUILDERS_DESKTOP) { fill(); }
+      else if (n < 100) { setTimeout(function(){ init(n + 1); }, 40); }
+    })(0);
+  })();
+</script>
+
+{%- comment -%}
+  Three builder-type cards — the REAL desktop builder for each discount type shown
+  in a browser window as a non-interactive screenshot (pointer-events:none on the
+  iframe, so a click hits the card link, not the builder). The desktop doc is laid
+  out at 1200px and scaled to each card's view width (--way-s). Same captured
+  desktop asset as the "shift" showcase window.
+{%- endcomment -%}
+<script>
+  (function(){
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.bndl-way[data-type]'));
+    if (!cards.length) return;
+    // keep each 1200px desktop builder scaled to its card view width
+    cards.forEach(function(card){
+      var frame = card.querySelector('.bndl-way-screen');
+      var view = frame && frame.parentNode;
+      if (!view) return;
+      var fit = function(){ var w = view.clientWidth; if (w) frame.style.setProperty('--way-s', (w / 1200).toFixed(5)); };
+      fit();
+      if ('ResizeObserver' in window) { new ResizeObserver(fit).observe(view); }
+      else { window.addEventListener('resize', fit, { passive: true }); }
+    });
+    function fill(){
+      var dk = window.BUNDLORA_REAL_BUILDERS_DESKTOP;
+      if (!dk) return;
+      cards.forEach(function(card){
+        var frame = card.querySelector('.bndl-way-screen');
+        var html = dk[card.getAttribute('data-type')];
+        if (frame && html && !frame.srcdoc) frame.srcdoc = html;
+      });
+    }
+    (function init(n){
+      if (window.BUNDLORA_REAL_BUILDERS_DESKTOP) { fill(); }
       else if (n < 100) { setTimeout(function(){ init(n + 1); }, 40); }
     })(0);
   })();
