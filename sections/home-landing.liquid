@@ -1,0 +1,647 @@
+{% comment %}
+  Bundlora — home landing (v6 · "quiet")
+  A minimal, editorial demo-store landing for the Bundlora build-your-own-bundle
+  app. Light + airy + professional. Identity carried by two recurring motifs:
+    • the cube / "bundle" glyph used as eyebrow + list markers
+    • the real builder (the actual merchant feature) shown honestly — live in the
+      hero, as a desktop+mobile mockup, and as screenshots in the builder-type cards
+  No glow blobs, no grain, no dot-grids, no floating chips, no gradient text.
+  Whitespace, type, strict alignment and one real interactive proof do the work.
+
+  Replaces the theme header + footer (both groups hidden in CSS). Functional
+  pieces that MUST stay: the hero .bndl-phone iframe + its discount-type tabs
+  and the bundlora-real-builders.js asset (the REAL Bundlora builder captured
+  for 3 discount types; regenerate with `node build-bundlora-builder.mjs`).
+{% endcomment %}
+
+{%- liquid
+  assign logo_img     = section.settings.logo_image
+  assign hero_link    = section.settings.hero_button_link  | default: '/pages/apparel-bundle'
+  assign nav_link     = section.settings.nav_cta_link       | default: hero_link
+  assign cta_link     = section.settings.cta_button_link    | default: hero_link
+  assign demo_apparel = section.settings.demo_apparel_link  | default: '/pages/apparel-bundle'
+  assign demo_jewelry = section.settings.demo_jewelry_link  | default: '/pages/jewelry-bundle'
+  assign demo_home    = section.settings.demo_home_link     | default: '/pages/home-bundle'
+-%}
+
+{%- capture bndl_cube -%}<svg class="bndl-cube" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>{%- endcapture -%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<div class="bndl">
+
+  {%- comment -%} ===================== NAV ===================== {%- endcomment -%}
+  <header class="bndl-nav" id="bndl-nav">
+    <div class="bndl-wrap bndl-nav-in">
+      <a href="{{ routes.root_url }}" class="bndl-brand" aria-label="Bundlora home">
+        {%- if logo_img -%}
+          {{ logo_img | image_url: width: 72 | image_tag: alt: 'Bundlora', class: 'bndl-brand-mark', width: 30, height: 30 }}
+        {%- else -%}
+          <img class="bndl-brand-mark" src="{{ 'bundlora-logo.png' | asset_url }}" width="30" height="30" alt="Bundlora" loading="eager">
+        {%- endif -%}
+        <span class="bndl-brand-name">Bundlora</span>
+      </a>
+      <nav class="bndl-nav-links" aria-label="Primary">
+        <a href="#how">How it works</a>
+        <a href="#types">Builder types</a>
+        <a href="#demos">Store demos</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="{{ nav_link }}" class="bndl-btn bndl-btn-primary bndl-btn-sm">{{ section.settings.nav_cta_label | default: 'See a live demo' }}</a>
+    </div>
+  </header>
+
+  {%- comment -%} ===================== HERO ===================== {%- endcomment -%}
+  <section class="bndl-hero">
+    <div class="bndl-wrap bndl-hero-in">
+      <div class="bndl-hero-copy">
+        <span class="bndl-eyebrow bndl-rise" style="--d:0ms">{{ bndl_cube }}{{ section.settings.hero_eyebrow | default: 'Build-your-own-bundle for Shopify' }}</span>
+        <h1 class="bndl-rise" style="--d:60ms">{{ section.settings.hero_heading | default: 'Customers build the bundle.' }} <span class="bndl-h1-soft">{{ section.settings.hero_heading_accent | default: 'You grow the order.' }}</span></h1>
+        <p class="bndl-lede bndl-rise" style="--d:120ms">{{ section.settings.hero_subtext | default: 'Bundlora gives your store a dedicated builder page where shoppers mix and match their own bundle — with a discount that applies automatically at checkout. No code, no theme edits.' }}</p>
+        <div class="bndl-hero-cta bndl-rise" style="--d:180ms">
+          <a href="{{ hero_link }}" class="bndl-btn bndl-btn-primary bndl-btn-lg">{{ section.settings.hero_button_label | default: 'See it on a real store' }} <span class="bndl-arr">&rarr;</span></a>
+          <a href="#how" class="bndl-textlink">How it works</a>
+        </div>
+        <div class="bndl-ladder bndl-rise" style="--d:240ms" aria-label="Discounts grow as shoppers add more items">
+          <span class="bndl-ladder-lbl">More items, bigger saving</span>
+          <div class="bndl-rungs">
+            <span class="bndl-rung"><b>2 items</b><i>5% off</i></span>
+            <span class="bndl-rung"><b>3 items</b><i>10% off</i></span>
+            <span class="bndl-rung bndl-rung-on"><b>4+ items</b><i>15% off</i></span>
+          </div>
+        </div>
+      </div>
+
+      {%- comment -%} live interactive builder — the REAL Bundlora storefront builder (3 discount types via tabs), scaled cleanly into a phone {%- endcomment -%}
+      <div class="bndl-stage bndl-rise" style="--d:140ms">
+        <div class="bndl-builder">
+          <div class="bndl-builder-tabs" role="tablist" aria-label="Bundle discount type">
+            <button type="button" class="bndl-builder-tab" role="tab" aria-selected="false" data-type="simple">Simple %</button>
+            <button type="button" class="bndl-builder-tab is-on" role="tab" aria-selected="true" data-type="tiered">Tiered %</button>
+            <button type="button" class="bndl-builder-tab" role="tab" aria-selected="false" data-type="bogo">Buy 1 Get 1</button>
+          </div>
+          <div class="bndl-phone">
+            <iframe class="bndl-phone-screen" title="Live Bundlora bundle builder demo" loading="lazy" referrerpolicy="no-referrer"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===================== THE SHIFT / SHOWCASE ===================== {%- endcomment -%}
+  <section class="bndl-sec bndl-show" id="how">
+    <div class="bndl-wrap bndl-show-in">
+      <div class="bndl-show-copy bndl-reveal">
+        <div class="bndl-kick">{{ bndl_cube }}The shift</div>
+        <h2>Native Shopify ships fixed bundles. Bundlora lets shoppers build their own.</h2>
+        <p>You want a bigger average order and more units per sale — but stock Shopify can only sell a bundle you pre-define. Bundlora gives you a standalone builder page where customers assemble the combination <em>they</em> want, with no developer and no theme edits.</p>
+        <ul class="bndl-points">
+          <li><span class="bndl-pt-mk">{{ bndl_cube }}</span><div><b>A page of its own</b>Every builder lives on its own URL — link it from a collection, an email, or an ad.</div></li>
+          <li><span class="bndl-pt-mk">{{ bndl_cube }}</span><div><b>No-code, on-brand</b>Appearance templates match the builder to your store without touching theme code.</div></li>
+          <li><span class="bndl-pt-mk">{{ bndl_cube }}</span><div><b>Automatic discounts</b>Your pricing is applied at the cart — no codes for shoppers to remember.</div></li>
+        </ul>
+      </div>
+      <div class="bndl-show-vis bndl-reveal">
+        {%- comment -%} live proof — the REAL builder at desktop width (browser window) with the real mobile builder beside it; same captured asset as the hero {%- endcomment -%}
+        <figure class="bndl-win">
+          <div class="bndl-win-bar" aria-hidden="true">
+            <span class="bndl-win-dot"></span><span class="bndl-win-dot"></span><span class="bndl-win-dot"></span>
+            <span class="bndl-win-addr">startup-apps.myshopify.com/pages/apparel-bundle</span>
+          </div>
+          <div class="bndl-win-view">
+            <iframe class="bndl-win-screen" title="The Bundlora bundle builder on desktop" loading="lazy" referrerpolicy="no-referrer"></iframe>
+          </div>
+        </figure>
+        <figure class="bndl-show-phone">
+          <div class="bndl-show-phone-view">
+            <iframe class="bndl-show-phone-screen" title="The Bundlora bundle builder on mobile" loading="lazy" referrerpolicy="no-referrer"></iframe>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===================== THREE BUILDER TYPES ===================== {%- endcomment -%}
+  <section class="bndl-sec bndl-types" id="types">
+    <div class="bndl-wrap">
+      <div class="bndl-lead bndl-reveal">
+        <div class="bndl-kick">{{ bndl_cube }}Three ways to build</div>
+        <h2>One app, three builder types</h2>
+        <p>Pick the format that fits your products.</p>
+      </div>
+      <div class="bndl-ways">
+        <a class="bndl-way bndl-way--link bndl-reveal" href="https://startup-apps.myshopify.com/apps/bundlora/simple-bundle-builder" target="_blank" rel="noopener">
+          <div class="bndl-way-shot"><img src="{{ 'bundlora-type-simple.png' | asset_url }}" width="1200" height="640" alt="Simple bundle builder with one flat discount" loading="lazy"></div>
+          <div class="bndl-way-body">
+            <h3>Simple bundle</h3>
+            <p>Pick any mix, unlock one flat discount.</p>
+          </div>
+        </a>
+        <a class="bndl-way bndl-way--link bndl-reveal" href="https://startup-apps.myshopify.com/apps/bundlora/discount-bundle-builder" target="_blank" rel="noopener">
+          <div class="bndl-way-shot"><img src="{{ 'bundlora-type-tiered.png' | asset_url }}" width="1200" height="640" alt="Tiered bundle builder with quantity tiers" loading="lazy"></div>
+          <div class="bndl-way-body">
+            <h3>Tiered bundle</h3>
+            <p>The more they add, the more they save.</p>
+          </div>
+        </a>
+        <a class="bndl-way bndl-way--link bndl-reveal" href="https://startup-apps.myshopify.com/apps/bundlora/gifted-bundle-builder" target="_blank" rel="noopener">
+          <div class="bndl-way-shot"><img src="{{ 'bundlora-type-bogo.png' | asset_url }}" width="1200" height="640" alt="Buy one get one bundle builder" loading="lazy"></div>
+          <div class="bndl-way-body">
+            <h3>Buy 1, get 1</h3>
+            <p>Buy a set — the cheapest item is free.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===================== TRY ON A REAL STORE ===================== {%- endcomment -%}
+  <section class="bndl-sec bndl-demos" id="demos">
+    <div class="bndl-wrap">
+      <div class="bndl-lead bndl-reveal">
+        <div class="bndl-kick">{{ bndl_cube }}Try it for real</div>
+        <h2>Open a live builder in a real storefront</h2>
+        <p>These are full demo pages running inside this store — exactly what your shoppers would land on. Open one and build a bundle yourself.</p>
+      </div>
+      <div class="bndl-demo-grid">
+        <a href="{{ demo_apparel }}" class="bndl-demo bndl-reveal">
+          <span class="bndl-demo-ic" data-v="apparel"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3l4 2-2 4-2-1v13H8V8L6 9 4 5l4-2 1 2a3 3 0 0 0 6 0z"/></svg></span>
+          <div class="bndl-demo-kick">Apparel &middot; Product-pick</div>
+          <h3>Complete the Outfit</h3>
+          <p>Mix tops, bottoms, and accessories — the more pieces, the bigger the discount.</p>
+          <span class="bndl-demo-cta">Open demo <span class="bndl-arr">&rarr;</span></span>
+        </a>
+        <a href="{{ demo_jewelry }}" class="bndl-demo bndl-reveal">
+          <span class="bndl-demo-ic" data-v="jewelry"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12l3 5-9 13L3 8z"/><path d="M3 8h18M9 3 7 8l5 13 5-13-2-5"/></svg></span>
+          <div class="bndl-demo-kick">Jewelry &middot; Guided</div>
+          <h3>Curate Your Set</h3>
+          <p>Step through necklaces, rings, and earrings to build a coordinated set in seconds.</p>
+          <span class="bndl-demo-cta">Open demo <span class="bndl-arr">&rarr;</span></span>
+        </a>
+        <a href="{{ demo_home }}" class="bndl-demo bndl-reveal">
+          <span class="bndl-demo-ic" data-v="home"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg></span>
+          <div class="bndl-demo-kick">Home &amp; Garden &middot; Quantity</div>
+          <h3>Create Your Perfect Space</h3>
+          <p>Furnish room by room and unlock volume savings as the bundle grows.</p>
+          <span class="bndl-demo-cta">Open demo <span class="bndl-arr">&rarr;</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===================== HOW IT WORKS ===================== {%- endcomment -%}
+  <section class="bndl-sec bndl-steps-sec">
+    <div class="bndl-wrap">
+      <div class="bndl-lead bndl-reveal">
+        <div class="bndl-kick">{{ bndl_cube }}Live in three steps</div>
+        <h2>No code, no theme edits</h2>
+      </div>
+      <ol class="bndl-how">
+        <li class="bndl-how-step bndl-reveal">
+          <span class="bndl-how-n">01</span>
+          <h3>Pick a format</h3>
+          <p>Simple, tiered, or BOGO.</p>
+        </li>
+        <li class="bndl-how-step bndl-reveal">
+          <span class="bndl-how-n">02</span>
+          <h3>Add products</h3>
+          <p>Drop them in, set your discount.</p>
+        </li>
+        <li class="bndl-how-step bndl-reveal">
+          <span class="bndl-how-n">03</span>
+          <h3>Publish</h3>
+          <p>Share the page's own URL anywhere.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  {%- comment -%} ===================== FAQ ===================== {%- endcomment -%}
+  <section class="bndl-sec bndl-faq" id="faq">
+    <div class="bndl-wrap bndl-faq-in">
+      <div class="bndl-faq-head bndl-reveal">
+        <div class="bndl-kick">{{ bndl_cube }}Good to know</div>
+        <h2>Questions merchants ask first</h2>
+        <p>The short version: Bundlora is its own page, so it never touches the rest of your store.</p>
+      </div>
+      <div class="bndl-faq-list">
+        <details class="bndl-faq-item bndl-reveal" open>
+          <summary>Does Bundlora change my theme?<span class="bndl-faq-mk" aria-hidden="true"></span></summary>
+          <p>No. Each builder lives on a standalone page with its own URL. Your product pages, theme code, and checkout stay exactly as they are.</p>
+        </details>
+        <details class="bndl-faq-item bndl-reveal">
+          <summary>How are the discounts applied?<span class="bndl-faq-mk" aria-hidden="true"></span></summary>
+          <p>Automatically at the cart and checkout. Shoppers never type a code — the bundle pricing you configured is applied the moment they add the bundle.</p>
+        </details>
+        <details class="bndl-faq-item bndl-reveal">
+          <summary>Which themes does it work with?<span class="bndl-faq-mk" aria-hidden="true"></span></summary>
+          <p>Any Shopify theme. Because the builder is its own page rather than an embedded widget, it works on Dawn and every popular theme without compatibility work.</p>
+        </details>
+        <details class="bndl-faq-item bndl-reveal">
+          <summary>Can I make it match my brand?<span class="bndl-faq-mk" aria-hidden="true"></span></summary>
+          <p>Yes. Appearance templates control fonts, colors, radii, and layout so the builder feels native — all without editing theme code.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===================== CLOSING CTA ===================== {%- endcomment -%}
+  <section class="bndl-sec bndl-close">
+    <div class="bndl-wrap">
+      <div class="bndl-cbox bndl-reveal">
+        <div class="bndl-cbox-t">
+          <div class="bndl-kick">{{ bndl_cube }}Try the builder</div>
+          <h2>{{ section.settings.cta_heading | default: 'Give your shoppers a bundle to build.' }}</h2>
+          <p>{{ section.settings.cta_text | default: 'Try a live builder the way your customers would — then bring one to your own store.' }}</p>
+          <a href="{{ cta_link }}" class="bndl-btn bndl-btn-primary bndl-btn-lg">{{ section.settings.cta_button_label | default: 'See it on a real store' }} <span class="bndl-arr">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===================== FOOTER ===================== {%- endcomment -%}
+  <footer class="bndl-footer">
+    <div class="bndl-wrap">
+      <div class="bndl-foot-grid">
+        <div class="bndl-foot-brand">
+          <a href="{{ routes.root_url }}" class="bndl-brand">
+            <img class="bndl-brand-mark" src="{{ 'bundlora-logo.png' | asset_url }}" width="30" height="30" alt="Bundlora" loading="lazy">
+            <span class="bndl-brand-name">Bundlora</span>
+          </a>
+          <p class="bndl-foot-blurb">The bundle builder that helps Shopify merchants sell more per order — without touching code.</p>
+        </div>
+        <div class="bndl-foot-col">
+          <h5>Explore</h5>
+          <a href="#how">How it works</a>
+          <a href="#types">Builder types</a>
+          <a href="#demos">Store demos</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="bndl-foot-col">
+          <h5>Demos</h5>
+          <a href="{{ demo_apparel }}">Apparel bundle</a>
+          <a href="{{ demo_jewelry }}">Jewelry bundle</a>
+          <a href="{{ demo_home }}">Home &amp; garden bundle</a>
+        </div>
+        <div class="bndl-foot-col">
+          <h5>Get started</h5>
+          <a href="{{ hero_link }}">Try a live demo</a>
+          <a href="{{ nav_link }}">{{ section.settings.nav_cta_label | default: 'See a live demo' }}</a>
+        </div>
+      </div>
+      <div class="bndl-foot-bottom">
+        <span>&copy; {{ 'now' | date: '%Y' }} Bundlora. Demo store — not affiliated with Shopify Inc.</span>
+        <span>Built for the Shopify App Store</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<style>
+  .bndl{
+    --ink:#191430; --ink-2:#2f2a45; --muted:#6b6780; --faint:#9a96ad;
+    --paper:#ffffff; --paper-2:#faf9fe; --paper-3:#f3f0fb;
+    --accent:#6e4ef0; --accent-d:#5a3fd0; --accent-soft:#efeafe;
+    --mint:#1f9d72;
+    --line:rgba(25,20,48,0.09); --line-2:rgba(25,20,48,0.14);
+    --sh-sm:0 1px 2px rgba(25,20,48,0.05);
+    --sh:0 1px 2px rgba(25,20,48,0.04), 0 10px 28px rgba(25,20,48,0.06);
+    --sh-lg:0 2px 6px rgba(25,20,48,0.05), 0 26px 60px rgba(25,20,48,0.10);
+    --ff:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    --disp:"Bricolage Grotesque",var(--ff);
+    --r:14px; --r-lg:20px;
+    font-family:var(--ff);color:var(--ink);line-height:1.6;background:var(--paper);
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    font-feature-settings:"ss01","cv01";
+  }
+  .bndl *{box-sizing:border-box;}
+  .bndl h1,.bndl h2,.bndl h3{font-family:var(--disp);margin:0;letter-spacing:-0.028em;line-height:1.03;text-wrap:balance;color:var(--ink);font-weight:700;}
+  .bndl h5{margin:0;}
+  .bndl p{margin:0;}
+  .bndl a{color:inherit;text-decoration:none;}
+  .bndl img{display:block;max-width:100%;}
+  .bndl em{font-style:italic;color:var(--ink);}
+  .bndl-wrap{width:100%;max-width:1140px;margin:0 auto;padding:0 28px;}
+  .bndl-cube{color:var(--accent);vertical-align:-2px;}
+
+  /* hide theme header + footer on this landing only */
+  .shopify-section-group-header-group,
+  .shopify-section-group-footer-group{display:none!important;}
+
+  /* eyebrow / section kicker */
+  .bndl-eyebrow,.bndl-kick{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:0.02em;color:var(--accent-d);}
+  .bndl-kick{margin-bottom:18px;text-transform:none;}
+  .bndl-eyebrow{padding:7px 13px;border:1px solid var(--line-2);border-radius:999px;background:var(--paper);color:var(--ink-2);}
+  .bndl-eyebrow .bndl-cube{color:var(--accent);}
+
+  /* buttons */
+  .bndl-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--ff);font-size:15px;font-weight:600;border-radius:11px;padding:12px 20px;border:1px solid transparent;cursor:pointer;transition:transform .16s ease,background .18s ease,box-shadow .18s ease,border-color .18s ease;white-space:nowrap;}
+  .bndl-btn-lg{padding:15px 24px;font-size:15.5px;}
+  .bndl-btn-sm{padding:10px 16px;font-size:14px;border-radius:10px;}
+  .bndl-btn-primary{background:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(110,78,240,0.26);}
+  .bndl-btn-primary:hover{background:var(--accent-d);color:#fff;transform:translateY(-2px);box-shadow:0 10px 26px rgba(110,78,240,0.34);}
+  .bndl-arr{font-size:17px;line-height:1;margin-top:-1px;transition:transform .18s ease;}
+  .bndl-btn:hover .bndl-arr{transform:translateX(3px);}
+  .bndl-textlink{font-size:15px;font-weight:600;color:var(--ink);display:inline-flex;align-items:center;gap:6px;border-bottom:1.5px solid var(--line-2);padding-bottom:2px;transition:border-color .16s ease;}
+  .bndl-textlink:hover{border-color:var(--accent);}
+
+  /* nav */
+  .bndl-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.85);backdrop-filter:saturate(160%) blur(12px);-webkit-backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid transparent;transition:border-color .25s ease,box-shadow .25s ease;}
+  .bndl-nav.bndl-nav-stuck{border-bottom-color:var(--line);box-shadow:var(--sh-sm);}
+  .bndl-nav-in{display:flex;align-items:center;gap:24px;height:68px;}
+  .bndl-brand{display:inline-flex;align-items:center;gap:10px;}
+  .bndl-brand-mark{width:30px;height:30px;border-radius:8px;display:block;}
+  .bndl-brand-name{font-family:var(--disp);font-weight:800;font-size:19px;letter-spacing:-0.03em;color:var(--ink);}
+  .bndl-nav-links{margin-left:auto;display:flex;gap:30px;}
+  .bndl-nav-links a{font-size:14.5px;font-weight:500;color:var(--muted);transition:color .15s ease;}
+  .bndl-nav-links a:hover{color:var(--ink);}
+  .bndl-nav .bndl-btn-sm{margin-left:4px;}
+
+  /* hero */
+  .bndl-hero{background:linear-gradient(180deg,var(--paper-2),var(--paper));padding:clamp(48px,7vw,92px) 0 clamp(56px,7vw,96px);}
+  .bndl-hero-in{display:grid;grid-template-columns:1.06fr 0.94fr;gap:clamp(32px,5vw,72px);align-items:center;}
+  .bndl-hero-copy{max-width:560px;}
+  .bndl-hero h1{font-size:clamp(42px,5.8vw,72px);font-weight:800;margin-top:22px;letter-spacing:-0.035em;line-height:0.99;}
+  .bndl-h1-soft{color:var(--accent-d);}
+  .bndl-lede{margin-top:24px;font-size:19px;color:var(--muted);max-width:500px;line-height:1.62;}
+  .bndl-hero-cta{margin-top:32px;display:flex;align-items:center;gap:22px;flex-wrap:wrap;}
+  .bndl-ladder{margin-top:38px;display:flex;flex-direction:column;gap:13px;}
+  .bndl-ladder-lbl{font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint);}
+  .bndl-rungs{display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
+  .bndl-rung{display:inline-flex;align-items:center;gap:9px;padding:8px 15px;border:1px solid var(--line-2);border-radius:999px;background:var(--paper);white-space:nowrap;}
+  .bndl-rung b{font-family:var(--ff);font-weight:600;font-size:13.5px;color:var(--ink-2);font-variant-numeric:tabular-nums;}
+  .bndl-rung i{font-style:normal;font-size:13px;font-weight:700;color:var(--mint);padding-left:9px;border-left:1px solid var(--line-2);}
+  .bndl-rung-on{border-color:var(--accent);background:var(--accent-soft);}
+  .bndl-rung-on b{color:var(--ink);}
+  .bndl-rung-on i{color:var(--accent-d);border-left-color:rgba(110,78,240,0.30);}
+
+  /* hero stage — the real Bundlora builder, clean in a phone with type tabs */
+  .bndl-stage{position:relative;justify-self:center;display:flex;justify-content:center;width:100%;}
+  .bndl-builder{display:flex;flex-direction:column;align-items:center;gap:16px;}
+  .bndl-builder-tabs{display:inline-flex;gap:4px;background:var(--paper-3);border:1px solid var(--line);border-radius:12px;padding:4px;}
+  .bndl-builder-tab{border:0;background:transparent;font-family:var(--ff);font-size:12.5px;font-weight:600;color:var(--muted);padding:8px 14px;border-radius:9px;cursor:pointer;white-space:nowrap;transition:background .15s ease,color .15s ease,box-shadow .15s ease;}
+  .bndl-builder-tab:hover{color:var(--ink);}
+  .bndl-builder-tab.is-on{background:#fff;color:var(--ink);box-shadow:var(--sh-sm);}
+  .bndl-phone{position:relative;width:300px;height:632px;border-radius:44px;overflow:hidden;background:#fafafa;border:1px solid rgba(25,20,48,0.06);box-shadow:0 2px 6px rgba(33,18,77,0.06),0 30px 70px rgba(33,18,77,0.22),0 12px 26px rgba(33,18,77,0.12);}
+  .bndl-phone-screen{width:390px;height:822px;border:0;display:block;background:#fafafa;transform:scale(0.76923);transform-origin:top left;}
+
+
+  /* sections */
+  .bndl-sec{padding:clamp(72px,10vw,128px) 0;}
+  .bndl-lead{max-width:640px;margin-bottom:clamp(40px,5vw,64px);}
+  .bndl-lead h2{font-size:clamp(28px,3.8vw,44px);font-weight:700;}
+  .bndl-lead p{margin-top:18px;color:var(--muted);font-size:18px;line-height:1.6;}
+
+  /* showcase / the shift */
+  .bndl-show{border-top:1px solid var(--line);background:var(--paper);}
+  .bndl-show-in{display:grid;grid-template-columns:0.92fr 1.08fr;gap:clamp(36px,5vw,80px);align-items:center;}
+  .bndl-show-copy h2{font-size:clamp(28px,3.6vw,42px);}
+  .bndl-show-copy>p{margin-top:20px;color:var(--muted);font-size:17.5px;line-height:1.62;}
+  .bndl-points{list-style:none;margin:30px 0 0;padding:0;display:flex;flex-direction:column;gap:2px;}
+  .bndl-points li{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-top:1px solid var(--line);}
+  .bndl-points li:first-child{border-top:none;}
+  .bndl-pt-mk{flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--accent-soft);display:grid;place-items:center;margin-top:1px;}
+  .bndl-points b{display:block;font-family:var(--disp);font-weight:700;font-size:16px;color:var(--ink);margin-bottom:3px;}
+  .bndl-points div{font-size:14.5px;color:var(--muted);line-height:1.55;}
+  .bndl-show-vis{position:relative;padding:6px 6px 22px;}
+  /* desktop "browser window" — the real builder rendered at desktop width, scaled to fit */
+  .bndl-win{margin:0;border-radius:14px;overflow:hidden;background:var(--paper);border:1px solid var(--line);box-shadow:var(--sh-lg);max-width:560px;}
+  .bndl-win-bar{display:flex;align-items:center;gap:7px;height:36px;padding:0 14px;background:var(--paper-3);border-bottom:1px solid var(--line);}
+  .bndl-win-dot{width:9px;height:9px;border-radius:50%;background:var(--line-2);flex:0 0 auto;}
+  .bndl-win-addr{margin-left:12px;flex:1;min-width:0;height:21px;display:flex;align-items:center;padding:0 12px;border-radius:7px;background:var(--paper);border:1px solid var(--line);font-size:10.5px;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .bndl-win-view{position:relative;width:100%;aspect-ratio:1200/850;overflow:hidden;background:#fafafa;}
+  .bndl-win-screen{position:absolute;top:0;left:0;width:1200px;height:850px;border:0;display:block;background:#fafafa;transform:scale(var(--win-s,0.4517));transform-origin:top left;}
+  /* the real mobile builder, leaning on the window's bottom-left (device duo) — keeps the cart sidebar on the right fully visible */
+  .bndl-show-phone{position:absolute;left:-6px;bottom:-6px;margin:0;width:150px;height:303px;border-radius:26px;overflow:hidden;background:#fafafa;border:6px solid var(--paper);box-shadow:var(--sh-lg);}
+  .bndl-show-phone-view{position:relative;width:100%;height:100%;overflow:hidden;}
+  .bndl-show-phone-screen{position:absolute;top:0;left:0;width:390px;height:822px;border:0;display:block;background:#fafafa;transform:scale(0.35385);transform-origin:top left;}
+
+  /* three builder types — screenshot cards */
+  .bndl-ways{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .bndl-way{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;}
+  .bndl-way--link{display:block;cursor:pointer;text-decoration:none;color:inherit;}
+  .bndl-way:hover{transform:translateY(-4px);box-shadow:var(--sh);border-color:var(--line-2);}
+  .bndl-way-shot{aspect-ratio:1200/640;background:var(--paper-2);border-bottom:1px solid var(--line);overflow:hidden;}
+  .bndl-way-shot img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+  .bndl-way-body{padding:22px 24px 26px;}
+  .bndl-way h3{font-size:19px;font-weight:700;}
+  .bndl-way-body p{margin-top:7px;color:var(--muted);font-size:15px;line-height:1.55;}
+
+  /* store demos */
+  .bndl-demos{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .bndl-demo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .bndl-demo{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px 26px 26px;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;}
+  .bndl-demo:hover{transform:translateY(-4px);box-shadow:var(--sh);border-color:var(--line-2);}
+  .bndl-demo-ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;margin-bottom:20px;}
+  .bndl-demo-ic[data-v="apparel"]{background:var(--accent-soft);color:var(--accent-d);}
+  .bndl-demo-ic[data-v="jewelry"]{background:#e6f3fb;color:#2480b0;}
+  .bndl-demo-ic[data-v="home"]{background:#e6f5ef;color:#198062;}
+  .bndl-demo-kick{font-size:12px;font-weight:700;letter-spacing:0.02em;text-transform:uppercase;color:var(--faint);}
+  .bndl-demo h3{font-size:20px;font-weight:700;margin-top:8px;}
+  .bndl-demo>p{margin-top:10px;color:var(--muted);font-size:14.5px;line-height:1.58;flex:1;}
+  .bndl-demo-cta{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);font-weight:700;font-size:14.5px;color:var(--accent-d);display:inline-flex;align-items:center;gap:7px;}
+  .bndl-demo:hover .bndl-demo-cta .bndl-arr{transform:translateX(3px);}
+
+  /* how it works */
+  .bndl-how{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);}
+  .bndl-how-step{padding:34px 32px 8px;border-left:1px solid var(--line);}
+  .bndl-how-step:first-child{border-left:none;padding-left:0;}
+  .bndl-how-n{font-family:var(--disp);font-weight:800;font-size:15px;color:var(--accent);font-variant-numeric:tabular-nums;}
+  .bndl-how-step h3{font-size:20px;font-weight:700;margin-top:16px;}
+  .bndl-how-step p{margin-top:11px;color:var(--muted);font-size:15.5px;line-height:1.6;max-width:300px;}
+
+  /* faq */
+  .bndl-faq{background:var(--paper);}
+  .bndl-faq-in{display:grid;grid-template-columns:0.8fr 1.2fr;gap:clamp(36px,5vw,64px);align-items:start;}
+  .bndl-faq-head{margin-bottom:0;}
+  .bndl-faq-head h2{font-size:clamp(26px,3.3vw,38px);}
+  .bndl-faq-head p{margin-top:16px;color:var(--muted);font-size:16.5px;line-height:1.6;}
+  .bndl-faq-list{display:flex;flex-direction:column;}
+  .bndl-faq-item{border-top:1px solid var(--line);}
+  .bndl-faq-item:last-child{border-bottom:1px solid var(--line);}
+  .bndl-faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 2px;font-family:var(--disp);font-weight:700;font-size:17px;color:var(--ink);}
+  .bndl-faq-item summary::-webkit-details-marker{display:none;}
+  .bndl-faq-mk{position:relative;width:16px;height:16px;flex:0 0 auto;}
+  .bndl-faq-mk::before,.bndl-faq-mk::after{content:"";position:absolute;background:var(--accent);border-radius:2px;transition:transform .2s ease,opacity .2s ease;}
+  .bndl-faq-mk::before{top:7px;left:0;width:16px;height:2px;}
+  .bndl-faq-mk::after{top:0;left:7px;width:2px;height:16px;}
+  .bndl-faq-item[open] .bndl-faq-mk::after{transform:scaleY(0);opacity:0;}
+  .bndl-faq-item p{padding:0 2px 24px;color:var(--muted);font-size:15.5px;line-height:1.62;max-width:580px;}
+
+  /* closing cta */
+  .bndl-close{padding-top:clamp(60px,8vw,96px);}
+  .bndl-cbox{position:relative;background:var(--paper-3);border:1px solid var(--line);border-radius:var(--r-lg);text-align:center;padding:clamp(44px,6vw,72px) clamp(32px,5vw,64px);overflow:hidden;}
+  .bndl-cbox-t{max-width:560px;margin:0 auto;}
+  .bndl-cbox h2{font-size:clamp(28px,3.6vw,42px);margin-top:14px;}
+  .bndl-cbox p{margin:16px auto 28px;color:var(--muted);font-size:18px;line-height:1.6;max-width:480px;}
+
+  /* footer */
+  .bndl-footer{border-top:1px solid var(--line);background:var(--paper-2);padding:72px 0 40px;}
+  .bndl-foot-grid{display:grid;grid-template-columns:1.7fr repeat(3,1fr);gap:40px;}
+  .bndl-foot-blurb{margin-top:18px;font-size:14.5px;color:var(--muted);max-width:280px;line-height:1.65;}
+  .bndl-foot-col h5{font-family:var(--ff);font-size:11.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint);margin:0 0 16px;}
+  .bndl-foot-col a{display:block;font-size:14.5px;color:var(--muted);margin-bottom:12px;transition:color .15s ease;}
+  .bndl-foot-col a:hover{color:var(--ink);}
+  .bndl-foot-bottom{margin-top:52px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--faint);}
+
+  /* motion (subtle) */
+  .bndl-rise{opacity:0;transform:translateY(16px);animation:bndl-rise-in .7s cubic-bezier(.2,.7,.3,1) forwards;animation-delay:var(--d,0ms);}
+  @keyframes bndl-rise-in{to{opacity:1;transform:none;}}
+  .bndl-reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1);}
+  .bndl-reveal.bndl-in{opacity:1;transform:none;}
+
+  /* responsive */
+  @media (max-width:980px){
+    .bndl-hero-in{grid-template-columns:1fr;gap:24px;}
+    .bndl-hero-copy{max-width:600px;}
+    .bndl-stage{order:2;}
+    .bndl-show-in{grid-template-columns:1fr;gap:48px;}
+    .bndl-show-vis{max-width:560px;margin-inline:auto;}
+    .bndl-ways,.bndl-demo-grid{grid-template-columns:1fr 1fr;}
+    .bndl-how{grid-template-columns:1fr;border-top:none;}
+    .bndl-how-step{border-left:none;border-top:1px solid var(--line);padding:28px 0 8px;}
+    .bndl-how-step:first-child{padding-left:0;}
+    .bndl-faq-in{grid-template-columns:1fr;gap:28px;}
+    .bndl-cbox{padding:44px 32px;}
+  }
+  @media (max-width:640px){
+    .bndl-wrap{padding:0 20px;}
+    .bndl-nav-links{display:none;}
+    .bndl-nav-in{gap:0;}
+    .bndl-nav .bndl-btn-sm{margin-left:auto;}
+    .bndl-hero-cta{gap:16px;}
+    .bndl-phone{width:268px;height:564px;}
+    .bndl-phone-screen{transform:scale(0.687);}
+    .bndl-ways,.bndl-demo-grid{grid-template-columns:1fr;}
+    .bndl-show-vis{max-width:none;margin-inline:0;padding:0;}
+    .bndl-win{max-width:none;}
+    .bndl-show-phone{position:static;margin:18px auto 0;}
+    .bndl-cbox{padding:36px 24px;}
+    .bndl-foot-grid{grid-template-columns:1fr 1fr;gap:28px;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .bndl-rise,.bndl-reveal{opacity:1!important;transform:none!important;animation:none!important;transition:none!important;}
+    .bndl-btn:hover,.bndl-way:hover,.bndl-demo:hover{transform:none!important;}
+  }
+</style>
+
+{%- comment -%} Reveal-on-scroll + nav stuck state. Lightweight, no dependencies. {%- endcomment -%}
+<script>
+  (function(){
+    var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('bndl-in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 }) : null;
+    document.querySelectorAll('.bndl-reveal').forEach(function(el){
+      if (io) { io.observe(el); } else { el.classList.add('bndl-in'); }
+    });
+    var nav = document.getElementById('bndl-nav');
+    if (nav) {
+      var onScroll = function(){ nav.classList.toggle('bndl-nav-stuck', window.scrollY > 8); };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+  })();
+</script>
+
+{%- comment -%}
+  Live builder demo — the REAL Bundlora storefront builder, captured for three
+  discount types (simple %, tiered %, BOGO) by build-bundlora-builder.mjs and
+  served as isolated iframe documents. Each tab swaps the phone's srcdoc.
+{%- endcomment -%}
+<script src="{{ 'bundlora-real-builders.js' | asset_url }}" defer></script>
+<script>
+  (function(){
+    var frame = document.querySelector('.bndl-phone-screen');
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.bndl-builder-tab'));
+    if (!frame) return;
+    var current = null;
+    function show(type){
+      var data = window.BUNDLORA_REAL_BUILDERS;
+      if (!data || !data[type] || type === current) return;
+      current = type;
+      frame.srcdoc = data[type];
+      tabs.forEach(function(t){
+        var on = t.getAttribute('data-type') === type;
+        t.classList.toggle('is-on', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+    }
+    tabs.forEach(function(t){
+      t.addEventListener('click', function(){ show(t.getAttribute('data-type')); });
+    });
+    // bundlora-real-builders.js is deferred; poll briefly until it lands.
+    (function init(n){
+      if (window.BUNDLORA_REAL_BUILDERS) { show('tiered'); }
+      else if (n < 100) { setTimeout(function(){ init(n + 1); }, 40); }
+    })(0);
+  })();
+</script>
+
+{%- comment -%}
+  "The shift" showcase — same captured builder shown as static proof: the real
+  desktop layout in a browser window + the real mobile layout in a phone. The
+  desktop iframe is laid out at 1200px and scaled to its frame width (--win-s).
+{%- endcomment -%}
+<script>
+  (function(){
+    var win = document.querySelector('.bndl-win-screen');
+    var phone = document.querySelector('.bndl-show-phone-screen');
+    if (!win && !phone) return;
+    // keep the desktop iframe (1200px design) scaled to its frame's width
+    if (win) {
+      var view = win.parentNode;
+      var fit = function(){ var w = view.clientWidth; if (w) win.style.setProperty('--win-s', (w / 1200).toFixed(5)); };
+      fit();
+      if ('ResizeObserver' in window) { new ResizeObserver(fit).observe(view); }
+      else { window.addEventListener('resize', fit, { passive: true }); }
+    }
+    function fill(){
+      var dk = window.BUNDLORA_REAL_BUILDERS_DESKTOP, mk = window.BUNDLORA_REAL_BUILDERS;
+      if (win && dk && dk.tiered) win.srcdoc = dk.tiered;
+      if (phone && mk && mk.tiered) phone.srcdoc = mk.tiered;
+    }
+    (function init(n){
+      if (window.BUNDLORA_REAL_BUILDERS && window.BUNDLORA_REAL_BUILDERS_DESKTOP) { fill(); }
+      else if (n < 100) { setTimeout(function(){ init(n + 1); }, 40); }
+    })(0);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Home landing (v6)",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Navigation" },
+    { "type": "image_picker", "id": "logo_image", "label": "Logo (optional)", "info": "Defaults to the Bundlora mark." },
+    { "type": "text", "id": "nav_cta_label", "label": "Nav button label", "default": "See a live demo" },
+    { "type": "url", "id": "nav_cta_link", "label": "Nav button link" },
+
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Build-your-own-bundle for Shopify" },
+    { "type": "text", "id": "hero_heading", "label": "Heading", "default": "Customers build the bundle." },
+    { "type": "text", "id": "hero_heading_accent", "label": "Heading (second line)", "default": "You grow the order.", "info": "Shown in a softer tone after the heading." },
+    { "type": "textarea", "id": "hero_subtext", "label": "Subtext", "default": "Bundlora gives your store a dedicated builder page where shoppers mix and match their own bundle — with a discount that applies automatically at checkout. No code, no theme edits." },
+    { "type": "text", "id": "hero_button_label", "label": "Primary button label", "default": "See it on a real store" },
+    { "type": "url", "id": "hero_button_link", "label": "Primary button link", "info": "Defaults to the apparel bundle demo." },
+
+    { "type": "header", "content": "Store demos", "info": "The three live builder pages shoppers can open." },
+    { "type": "url", "id": "demo_apparel_link", "label": "Apparel demo link" },
+    { "type": "url", "id": "demo_jewelry_link", "label": "Jewelry demo link" },
+    { "type": "url", "id": "demo_home_link", "label": "Home & garden demo link" },
+
+    { "type": "header", "content": "Closing CTA" },
+    { "type": "text", "id": "cta_heading", "label": "CTA heading", "default": "Give your shoppers a bundle to build." },
+    { "type": "textarea", "id": "cta_text", "label": "CTA text", "default": "Try a live builder the way your customers would — then bring one to your own store." },
+    { "type": "text", "id": "cta_button_label", "label": "CTA button label", "default": "See it on a real store" },
+    { "type": "url", "id": "cta_button_link", "label": "CTA button link" }
+  ],
+  "presets": [
+    { "name": "Home landing (v6)" }
+  ]
+}
+{% endschema %}
